@@ -14,8 +14,8 @@ Hemos comenzado con el repositorio, les voy a dejar los comando que utilice:<br>
 cd Documents
 mkdir Proyectos
 cd Proyectos
-git clone git@github.com:ArielBetancud22/Prueba-Inicio-Repo.git
-cd Prueba-Inicio-Repo
+git clone git@github.com:HotCode2025/Codigo-Critico-Segundo-Semestre.git
+cd Codigo-Critico-Segundo-Semestre
 git pull origin main
 git fetch
 git branch # Veran que esta la rama main por defecto
@@ -36,4 +36,5 @@ Ingresamos al repositorio y luego solo presionamos punto<br>
 ```sh
      .
 ```
+
  Ingresamos toda esta información y terminamos.
