@@ -23,6 +23,11 @@ print(len(nombres)) # le pasamos como parametro la lista
 
 # Agregamos un elemento
 nombres.append('Marcelo')
+nombres.append([ 1, 2, 3])
+nombres.append(True)
+nombres.append(10.45)
+nombres.append([4, 5])
+nombres.append(7)
 print(nombres)
 
 # Insertar un elemento en un indice especifico

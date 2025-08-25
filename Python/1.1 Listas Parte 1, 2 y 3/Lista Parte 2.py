@@ -1,4 +1,7 @@
 # lista = Ariel , Liliana, Natalia, Osvaldo
+#Coleccion den Python
+
+#Las listas en lo que se conoce en otros lenguajes como arreglos o vectores
 
 nombres=['Naty', 'Osvaldo', 'Lily', 'Ariel']
 
