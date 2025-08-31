@@ -1,40 +1,104 @@
-# Comienzo del Readme
+# Repositorio del Equipo: Código Crítico 🚀
 
-Hemos comenzado con el repositorio, les voy a dejar los comando que utilice:<br>
+¡Bienvenid@s al repositorio oficial del equipo **Código Crítico** para el proyecto del Segundo Semestre!
 
-* Vimos como he creado el repositorio en la nube de Github
-* Es importante saber que antes de todo esto se debe tener todos los pasos de ingreso y seguridad
-* Cuando hablo de seguridad y conectividad se trata de la ssh, es la clave publica y privada
-* Copiamos el enlace ssh
-* Abrimos la terminal de Git Bash como administrador
-* Ingresamos al área de trabajo donde queremos agregar el repo
-* Yo ingrese a la carpeta Documents
+Este espacio es nuestra base de operaciones. Seguir las reglas y el flujo de trabajo establecidos es fundamental para mantener el orden, evitar conflictos y asegurar que colaboremos de manera eficiente.
 
-```sh
-cd Documents
-mkdir Proyectos
-cd Proyectos
-git clone git@github.com:HotCode2025/Codigo-Critico-Segundo-Semestre.git
+---
+
+## 📜 Reglas de Oro (Innegociables)
+
+> **1. La rama `main` es MUY IMPORTANTE.**
+> Nadie, bajo ninguna circunstancia, debe subir cambios (`push`) directamente a la rama `main`. Esta rama solo debe contener versiones estables y probadas del proyecto. Todo el trabajo se realiza en ramas individuales.
+>
+> **2. SINCRONIZA antes de trabajar y ANTES de subir.**
+> Para evitar conflictos y trabajar siempre sobre la última versión del código, haz `pull` de la rama `main` antes de empezar a programar y antes de subir tus propios cambios.
+
+---
+
+## Workflow de Desarrollo 💻
+
+Este es el ciclo de trabajo que todos debemos seguir.
+
+### 1. Configuración Inicial (Solo la primera vez)
+
+Si es tu primera vez trabajando en este proyecto, sigue estos pasos para configurar tu entorno local.
+
+``` bash
+### 1. Clona el repositorio en una carpeta específica
+git clone https://github.com/HotCode2025/Codigo-Critico-Segundo-Semestre.git
+
+### 2. Entra en el directorio del proyecto
 cd Codigo-Critico-Segundo-Semestre
+
+### 3. Crea y muévete a tu propia rama de trabajo. ¡Usa tu nombre o un identificador claro!
+git checkout -b rama_tu_nombre
+```
+
+¡Listo! Ya tienes tu copia del proyecto y tu propia rama para trabajar sin afectar a los demás.
+
+### 2. Ciclo de Trabajo Diario
+
+Cada vez que vayas a trabajar en el proyecto, sigue estos pasos:
+
+``` bash
+### 1. Asegúrate de estar en tu rama
+git checkout rama_tu_nombre
+
+### 2. Trae los últimos cambios de la rama principal para evitar conflictos
 git pull origin main
-git fetch
-git branch # Veran que esta la rama main por defecto
-touch README.md # Creamos el readme
-git status
+
+### 3. ¡A programar! Haz tus cambios, crea archivos, etc.
+
+###    ... (aquí va tu magia) ...
+
+### 4. Agrega tus cambios para que Git los rastree
 git add .
-git commit -m"creamos el readme.md"
-git status
-git push origin main
+
+### 5. Confirma los cambios con un mensaje DESCRIPTIVO
+###    Mal mensaje: "cambios"
+###    Buen mensaje: "feat: "Se realiza clase 3 de Programacion II Miercoles todos los ejercicios"
+
+git commit -m "Un mensaje que explique claramente lo que hiciste"
+
+### 6. Sube tus cambios a tu rama remota en el repositorio
+git push origin rama_tu_nombre 
 ```
 
-## Agregamos este trabajo en el readme online
+### 3. Integrar tus Cambios a `main` (Pull Request)
 
-> ¿Cómo hacemos esto?
+Cuando termines una tarea y quieras que tu código forme parte del proyecto principal, debes crear un **Pull Request** (PR).
 
-Ingresamos al repositorio y luego solo presionamos punto<br>
+1.  Ve a la página del repositorio en GitHub.
+2.  Verás un aviso para "Compare & pull request" desde tu rama. Haz clic ahí.
+3.  Escribe un título y una descripción clara de los cambios que realizaste.
+4.  Asigna a uno o más compañeros de equipo como "Reviewers" (revisores).
+5.  Una vez que tu PR sea revisado y aprobado, se podrá fusionar (`merge`) con la rama `main`.
 
-```sh
-     .
-```
+---
 
- Ingresamos toda esta información y terminamos.
+## 🧰 Comandos Útiles
+
+### Git
+
+| Comando | Descripción |
+| :--- | :--- |
+| `git status` | Muestra el estado de tus archivos y cambios pendientes. |
+| `git branch -a` | Lista todas las ramas (locales y remotas). |
+| `git checkout nombre_rama`| Cambia a otra rama existente. |
+| `git log` | Muestra el historial de commits. |
+
+### Terminal (Manejo de Archivos)
+
+| Comando | Descripción |
+| :--- | :--- |
+| `mkdir nombre_carpeta` | Crea una nueva carpeta. |
+| `cd nombre_carpeta` | Entra en una carpeta. |
+| `cd ..` | Vuelve al directorio anterior. |
+| `ls` o `dir` | Lista los archivos y carpetas del directorio actual. |
+| `rm archivo.txt` | Elimina un archivo. |
+| `rm -rf nombre_carpeta`| ⚠️ **¡CUIDADO!** Elimina una carpeta y todo su contenido de forma permanente. |
+
+---
+
+¡A programar y a romperla, equipo! 💪
