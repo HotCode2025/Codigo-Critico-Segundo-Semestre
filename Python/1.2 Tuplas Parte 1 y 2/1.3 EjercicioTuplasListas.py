@@ -1,3 +1,4 @@
+import math # Importamos la clase math para hacer uso de la función sqrt(raíz cuadrada)
 # Dada la siguiente tupla
 tupla = (13, 1, 8, 3, 2, 5, 8) # Definimos la tupla
 
@@ -10,4 +11,12 @@ for elemento in tupla:
     if elemento < 5:
         lista.append(elemento)
 print(lista)
+
+#Ejercicio de matematicas
+#Para sacar la raíz cuadrada de un número positivo
+numero = int(input("Digite un número positivo: "))
+while numero < 0:
+    print("Error -> Deberia ser un número positivo")
+    numero = int(input("Digite un número positivo: "))
+print(f"\nSu raíz cuadrada es: {math.sqrt(numero): .02f}")
 
