@@ -28,3 +28,7 @@ for llave, valor in seleccionArgentina.items():
 print("\n-------------------------------------")
 print('Tenemos cargados en el diccionario la cantidad de jugadores: ', end = '')
 print(len(seleccionArgentina))
+
+#Cómo recorrer un diccionario con el ciclo for, para imprimir tanto las llaves como los valores
+for i in seleccionArgentina:
+    print(f"{i} -> {seleccionArgentina[i]}")
