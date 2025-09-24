@@ -1,4 +1,7 @@
-
+/*
+Pedir 10 números y escribir la suma total.
+Hacerlo con la clase Scanner y JOptionPane
+*/
 package Ciclos10;
 import java.util.Scanner;
 
