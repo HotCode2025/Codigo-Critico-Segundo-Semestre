@@ -78,7 +78,6 @@ Este proyecto fue desarrollado con la colaboración de:
 -   **Mazara Ariel**
 -   **Zuñiga Agustina**
 -   **Silva Daniel**
--   **Lucas Reynoso**
 -   **Gonzalez Joel**
 -   **Baz Samira**
 -   **Mendez Oscar**
