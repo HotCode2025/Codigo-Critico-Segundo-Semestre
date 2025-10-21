@@ -28,12 +28,12 @@ class Producto:
         self._precio = precio
 
     #Sobre escribimos el metodo str
-    def__str__(self):
-    return f´_Id Producto: (self._id_producto), Nombre: (self._nombre), Precio: (self._precio)´
+    def __str__(self):
+    return f"_Id Producto: (self._id_producto), Nombre: (self._nombre), Precio: (self._precio)"
 
-if__name__ == ´__main__´: #solo será visible si la prueba se ejecuta desd aqui
+if __name__ == "__main__": #solo será visible si la prueba se ejecuta desd aqui
     producto1 = Producto("Camiseta", 100.00)
-    prodcuto2 = Producto("Pantalon", 150.00)
+    producto2 = Producto("Pantalon", 150.00)
 
 
 
