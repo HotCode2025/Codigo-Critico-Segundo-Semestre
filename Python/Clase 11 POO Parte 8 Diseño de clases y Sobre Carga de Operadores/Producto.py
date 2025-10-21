@@ -1,3 +1,6 @@
+
+#15.1 Creamos la clase Producto:
+
 class Producto:
     contador_productos = 0  #Varianle de Clase
 
@@ -31,6 +34,7 @@ class Producto:
 if__name__ == ´__main__´: #solo será visible si la prueba se ejecuta desd aqui
     producto1 = Producto("Camiseta", 100.00)
     prodcuto2 = Producto("Pantalon", 150.00)
+
 
 
 
