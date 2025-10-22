@@ -1,4 +1,6 @@
 #15.2 Creamos la clase Orden: Parte 1
+from Producto import Producto
+
 
 class orden:
     contador_ordenes = 0
@@ -21,8 +23,8 @@ def calcular_total(self):
 
 def __str__(self):
     productos_str = ""
-    for producto in self_productos:
-        productos_str += producto.__str__()+"/"
+    for producto in self._productos:
+        productos_str += producto.__str__()+"|"
     return f"Orden: (self.id_orden), \nProducto: (producto_str)"
 
 
@@ -30,6 +32,9 @@ if __name__ == "__main__":
     producto1 = Producto("Camiseta", 100.00)
     print(producto1)
     producto2 = Producto("Pantalon", 150.00)
-    print(producto2)
+    producto1 =[producto1, producto2] #Lista de Priductos
+    orden1 = Orden(producto1) #Primer objeto orden pasando la lista de productos
+    print(orden1)
+
 
 
