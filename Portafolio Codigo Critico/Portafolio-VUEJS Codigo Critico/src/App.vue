@@ -59,8 +59,7 @@ section h2 {
   font-weight: 600; /* Hacemos la letra un poco más gruesa (opcional) */
 }
 
-/* AQUÍ AGREGAMOS LOS ESTILOS DEL FOOTER
-  (Los movimos para que estén dentro del <style scoped>)
+/* AQUÍ ESTÁ EL CÓDIGO DEL FOOTER CORREGIDO
 */
 footer {
     display: flex;
@@ -68,5 +67,34 @@ footer {
     align-items: center;
     padding: 2rem;
     font-size: 1.3rem;
+
+    /* --- LÍNEAS NUEVAS AÑADIDAS --- */
+    background-color: #2c3e50; /* 1. El mismo azul que el NavBar */
+    color: #ecf0f1;           /* 2. Texto claro para el <p> */
+}
+
+/* 3. Estilo para el enlace "Inicio" dentro del footer */
+footer a {
+  color: #42b883; /* Un color de acento (verde de Vue) */
+  text-decoration: none;
+  font-weight: 500;
+  margin-bottom: 0.5rem; /* Espacio entre el enlace y el párrafo */
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+</style>
+
+<style>
+/* Este bloque <style> NO TIENE "scoped"
+  para que pueda aplicar los estilos al <body> de toda la página.
+*/
+body {
+  /* Un gradiente suave de blanco a gris claro */
+  background: linear-gradient(to bottom, #ffffff, #f0f2f5);
+  
+  /* Asegura que ocupe al menos toda la pantalla */
+  min-height: 100vh; 
 }
 </style>

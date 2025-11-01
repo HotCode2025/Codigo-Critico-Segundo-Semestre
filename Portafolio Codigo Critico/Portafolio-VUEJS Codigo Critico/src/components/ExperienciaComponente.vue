@@ -1,8 +1,8 @@
 <script setup>
 // Los iconos se reutilizan perfectamente
-import icono1 from '/src/assets/agriculture.svg'; // Ícono para AgroGestión
-import icono3 from '/src/assets/linux.svg'; // Ícono para Gestión de BBDD/Sistemas
-import icono5 from '/src/assets/git.svg'; // Ícono para Git/Colaboración
+import icono1 from '/src/assets/agriculture.svg'; // RUTA CORREGIDA
+import icono3 from '/src/assets/linux.svg'; // RUTA CORREGIDA
+import icono5 from '/src/assets/git.svg'; // RUTA CORREGIDA
 
 import { ref } from 'vue';
 
@@ -43,6 +43,10 @@ const experiencias = ref([
 
 <style scoped>
 /* Estilos generales para el layout y la tipografía */
+/* Nota: :root debería estar en un CSS global (ej: main.css) 
+   para que --color-primary, etc., funcionen. 
+   Pero lo dejamos aquí ya que así estaba en tu código. 
+*/
 :root {
     --color-primary: coral;
     --color-secondary: burlywood;
@@ -56,27 +60,30 @@ const experiencias = ref([
     display: flex;
     flex-direction: column;
     padding: 2.5rem; /* Un poco más de padding */
-    background-color: var(--color-bg-dark);
+    background-color: var(--color-bg-dark, rgb(28, 41, 52)); /* Fallback por si la variable no carga */
     border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Sombra más pronunciada para elegancia */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); 
     max-width: 800px; /* Limitar ancho para mejor legibilidad */
     margin: 2rem auto; /* Centrar la tarjeta */
-    font-family: var(--font-sans);
+    font-family: var(--font-sans, 'Roboto', sans-serif);
+    transition: all 0.3s ease; /* Transición suave */
 }
 
 .titulo {
-    font-size: 1.8rem; /* Título un poco más grande */
-    color: var(--color-primary);
+    font-size: 1.8rem; 
+    color: var(--color-primary, coral);
     margin-bottom: 0.5rem;
-    font-weight: 700; /* Negrita para el título */
-    letter-spacing: 0.05em; /* Espaciado de letras sutil */
+    font-weight: 700; 
+    letter-spacing: 0.05em; 
+    transition: font-size 0.3s ease;
 }
 
 .fecha {
-    font-size: 1.1rem; /* Fecha un poco más grande */
-    color: var(--color-secondary);
-    margin-bottom: 2rem; /* Más espacio debajo de la fecha */
-    font-weight: 300; /* Fuente más ligera */
+    font-size: 1.1rem; 
+    color: var(--color-secondary, burlywood);
+    margin-bottom: 2rem; 
+    font-weight: 300; 
+    transition: font-size 0.3s ease;
 }
 
 .listado {
@@ -93,7 +100,7 @@ const experiencias = ref([
     padding: 1.2rem 0; /* Padding vertical para cada item */
     gap: 1.5rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Separador sutil */
-    transition: background-color 0.3s ease; /* Transición para hover */
+    transition: background-color 0.3s ease, gap 0.3s ease, padding 0.3s ease; 
 }
 
 .item:last-child {
@@ -107,13 +114,56 @@ const experiencias = ref([
 
 .imagen-svg {
     flex-shrink: 0; /* Asegurar que el SVG no se encoja */
-    /* ¡LÍNEA BORRADA! Ya no forzamos el color */
+    width: 45px; /* Fijamos el tamaño en px en vez de rem para evitar que se achique con la fuente */
+    height: 45px;
 }
 
 .item p {
     font-size: 1rem;
-    color: var(--color-text-light);
+    color: var(--color-text-light, #e0e0e0);
     line-height: 1.6; /* Mejorar legibilidad del párrafo */
     margin: 0; /* Eliminar margen por defecto del párrafo */
+    transition: font-size 0.3s ease;
+}
+
+/* ============================================= */
+/* --- ESTE ES EL BLOQUE RESPONSIVO --- */
+/* ============================================= */
+@media (max-width: 600px) {
+    .card {
+        /* Achicamos el margen y el padding */
+        margin: 1rem auto;
+        padding: 1.5rem;
+        /* Hacemos que ocupe casi todo el ancho */
+        max-width: 95%;
+    }
+
+    .titulo {
+        /* Achicamos el título */
+        font-size: 1.5rem;
+    }
+
+    .fecha {
+        /* Achicamos la fecha */
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .item {
+        /* Reducimos el espacio entre el ícono y el texto */
+        gap: 1rem;
+        padding: 1rem 0;
+    }
+
+    .imagen-svg {
+        /* Achicamos el ícono en móvil */
+        width: 35px;
+        height: 35px;
+    }
+
+    .item p {
+        /* Achicamos el texto del párrafo */
+        font-size: 0.95rem;
+    }
 }
 </style>

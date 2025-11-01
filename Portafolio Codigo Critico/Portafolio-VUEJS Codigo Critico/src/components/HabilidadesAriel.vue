@@ -2,7 +2,7 @@
 // Se importa ref de vue para poder usarlo
 import { ref } from 'vue';
 
-// --- Imports de iconos (Solo los que usás en tu lista) ---
+// --- Imports de iconos (Asegúrate que tus rutas sean correctas) ---
 import img1 from '@/components/icons/js.svg';
 import img2 from '@/components/icons/python.svg';
 import img3 from '@/components/icons/html-css.svg';
@@ -79,6 +79,7 @@ const habilidades = ref([
     background-size: 400% 400%;
     /* Animación más sutil y lenta */
     animation: gradientBG 30s ease infinite;
+    transition: padding 0.3s ease; /* Transición suave */
 }
 
 @keyframes gradientBG {
@@ -106,12 +107,13 @@ const habilidades = ref([
     font-weight: bold;
     border-bottom: 1px solid #444; 
     padding-bottom: 0.5rem;
+    transition: all 0.3s ease; /* Transición suave */
 }
 
 .skills {
     display: flex;
     justify-content: left; 
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* <-- ESTA LÍNEA HACE LA MAGIA RESPONSIVA */
     gap: 15px; 
 }
 
@@ -135,8 +137,8 @@ const habilidades = ref([
 }
 
 .skill:hover {
-    /* EFECTO DE ELEVACIÓN */
-    transform: scale(1.2); /* Se agranda sutilmente */
+    /* EFECTO DE ELEVACIÓN (un poco más sutil) */
+    transform: scale(1.1); /* Se agranda sutilmente */
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); /* Sombra 3D */
     border-color: rgba(255, 255, 255, 0.3); /* Borde más brillante */
     background-color: rgba(255, 255, 255, 0.15); /* Fondo más opaco */
@@ -152,12 +154,24 @@ const habilidades = ref([
     color: #f0f0f0; 
 }
 
+/* --- BLOQUE RESPONSIVO ---
+  (Este bloque ya lo tenías y es perfecto) 
+*/
 @media (max-width: 768px) {
+    
+    .skills-contenedor {
+        /* Achicamos el padding en los costados */
+        padding: 2rem 1rem;
+    }
+
     .skills-categoria h3 {
+        /* Centramos el título */
         justify-content: center; 
+        font-size: 1.3em; /* Lo achicamos un poco */
     }
 
     .skills {
+        /* Centramos las pastillas de habilidades */
         justify-content: center; 
     }
 }

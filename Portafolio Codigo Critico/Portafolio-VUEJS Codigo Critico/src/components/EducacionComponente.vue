@@ -45,47 +45,17 @@ const educacion = ref([
         <div class="fecha">{{ item.fecha }}</div>
         <h3 class="title">{{ item.title }}</h3>
         <div class="descripcion">{{ item.descripcion }}</div>
-        <a v.if="item.enlace && item.enlace !== '#'" class="enlace" :href="item.enlace" target="_blank">Saber más</a>
+        
+        <a v-if="item.enlace && item.enlace !== '#'" class="enlace" :href="item.enlace" target="_blank">Saber más</a>
     </li>
     </ul>
 </template>
 
 <style scoped>
-/* Estilos generales */
-/* Importa una fuente moderna. 'Inter' es excelente para UI. */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
-/* Reseteo de estilos básicos para todos los elementos y pseudo-elementos */
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* Nota: Si ya tienes estos estilos en un archivo global (como body, *, etc.), 
-   puedes borrarlos de aquí para no duplicar código.
-   Los he dejado para que el componente funcione por sí solo. 
+/* Estilos generales como 'body', ':root' y el '@import' 
+  FUERON ELIMINADOS de aquí. 
+  Deben ir en tu archivo CSS global (ej: main.css).
 */
-body {
-  /* Paleta de colores más sobria y profesional */
-  --color: #333; /* Texto principal oscuro */
-  --bgColor: #f8f9fa; /* Fondo muy claro */
-  --cardBgColor: #ffffff; /* Fondo de las tarjetas de eventos */
-  --lineColor: #e0e0e0; /* Color de la línea de tiempo */
-  --shadowColor: rgba(0, 0, 0, 0.08); /* Sombra sutil */
-  --hoverShadow: rgba(0, 0, 0, 0.15); /* Sombra al pasar el mouse */
-
-  min-height: 100vh;
-  display: grid;
-  align-content: center;
-  gap: 2rem;
-  padding: 2rem;
-  font-family: 'Inter', sans-serif; /* Nueva fuente */
-  color: var(--color);
-  background: var(--bgColor);
-}
 
 /* Estilos para la lista (timeline) */
 ul {
@@ -108,7 +78,7 @@ ul::before {
   content: "";
   grid-column: 1;
   grid-row: 1 / span 20;
-  background: var(--lineColor); /* Color de línea más suave */
+  background: var(--lineColor, #e0e0e0); /* Color de línea más suave (con fallback) */
   border-radius: calc(var(--line-w) / 2);
   position: absolute; /* Para que no afecte el flujo del contenido */
   left: 0; /* Asegura que esté en la primera columna */
@@ -130,9 +100,9 @@ ul li {
   grid-row: span 2;
   display: grid;
   grid-template-rows: min-content min-content min-content auto; /* Añade auto para el enlace */
-  background: var(--cardBgColor);
+  background: var(--cardBgColor, #ffffff); /* Fondo de las tarjetas (con fallback) */
   border-radius: 8px; /* Bordes redondeados */
-  box-shadow: 0 4px 12px var(--shadowColor); /* Sombra suave */
+  box-shadow: 0 4px 12px var(--shadowColor, rgba(0, 0, 0, 0.08)); /* Sombra suave */
   transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición para efectos hover */
   padding: 1.5rem; /* Padding interno para el contenido */
   position: relative; /* Para el círculo */
@@ -141,7 +111,7 @@ ul li {
 /* Efecto hover en los ítems */
 ul li:hover {
     transform: translateY(-5px); /* Pequeño levantamiento */
-    box-shadow: 0 8px 20px var(--hoverShadow); /* Sombra más pronunciada */
+    box-shadow: 0 8px 20px var(--hoverShadow, rgba(0, 0, 0, 0.15)); /* Sombra más pronunciada */
 }
 
 /* Estilo para la fecha dentro de cada ítem */
@@ -150,7 +120,7 @@ ul li .fecha {
   height: var(--dateH);
   line-height: var(--dateH); /* Centra verticalmente el texto */
   text-align: center;
-  background-color: var(--fecha-color);
+  background-color: var(--fecha-color); /* Esta variable SÍ se define en este componente */
   color: white;
   font-size: 1rem; /* Tamaño de fuente ligeramente menor */
   font-weight: 600; /* Texto seminegrita */
@@ -175,7 +145,7 @@ ul li .fecha::after {
   position: absolute;
   width: 0.8rem; /* Círculo ligeramente más pequeño */
   aspect-ratio: 1;
-  background: var(--cardBgColor); /* Usa el color de fondo de la tarjeta */
+  background: var(--cardBgColor, #ffffff); /* Usa el color de fondo de la tarjeta */
   border: 0.25rem solid var(--fecha-color); /* Borde un poco más delgado */
   border-radius: 50%;
   top: 50%;
@@ -233,6 +203,7 @@ ul li .descripcion::before {
 
 
 /* Media query para pantallas anchas (40rem o más) */
+/* ESTO ES LO QUE LO HACE RESPONSIVO */
 @media (min-width: 40rem) {
   ul {
     grid-template-columns: 1fr var(--line-w) 1fr;
