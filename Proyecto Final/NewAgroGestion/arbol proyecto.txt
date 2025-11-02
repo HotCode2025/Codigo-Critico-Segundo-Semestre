@@ -1,0 +1,55 @@
+1. Estructura Final del Proyecto
+text
+AgroGestionIntegral/
+├── build.xml
+├── manifest.mf
+├── nbproject/
+│   ├── build-impl.xml
+│   ├── genfiles.properties
+│   ├── project.properties
+│   ├── project.xml
+│   └── private/
+│       ├── private.properties
+│       └── private.xml
+├── src/
+│   └── agestion/
+│       ├── main/
+│       │   └── Main.java
+│       ├── vistas/
+│       │   ├── MenuPrincipal.java
+│       │   └── MenuPrincipalConPanelLateral.java
+│       ├── servicios/
+│       │   ├── GestionCampo.java
+│       │   ├── GestionCosecha.java
+│       │   ├── GestionFinanciera.java
+│       │   ├── GestionMaquinaria.java
+│       │   ├── GestionParcelas.java
+│       │   ├── GestionPersonal.java
+│       │   ├── GestionRiegoFertilizacion.java
+│       │   └── GestionStock.java
+│       ├── modelo/
+│       │   ├── Empleado.java
+│       │   ├── Maquinaria.java
+│       │   ├── MovimientoCosecha.java
+│       │   ├── Parcela.java
+│       │   ├── PlanDeFertilizacion.java
+│       │   ├── PlanDeRiego.java
+│       │   ├── ProductoAgricola.java
+│       │   ├── TareaCampo.java
+│       │   └── Transaccion.java
+│       └── database/
+│           ├── DatabaseConnection.java
+│           ├── EmpleadoDAO.java
+│           └── ParcelaDAO.java
+├── lib/
+│   ├── h2-2.1.214.jar
+│   └── flatlaf-3.0.jar
+├── test/ (opcional para pruebas)
+└── dist/
+    ├── AgroGestionIntegral.jar
+    └── lib/
+        ├── h2-2.1.214.jar
+        └── flatlaf-3.0.jar
+
+
+perfecto, escribe unicamente la clases GestionCampo, GestionCosecha, GestionFinanciera, GestionMaquinaria, con pantalla con solapas dependiendo de lo que necesite cada clase. el codigo completo y comentado
