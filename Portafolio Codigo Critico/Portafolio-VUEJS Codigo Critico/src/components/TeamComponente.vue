@@ -33,13 +33,13 @@ const team = ref([
     name: 'Mazara Ariel', 
     role: 'Team Lead', 
     photo: '/img/ariel-photo.jpg', // Revisa esta ruta
-    githubUrl: 'https://portafolioarielmazaravue.netlify.app/' 
+    githubUrl: 'https://portafolio-jmazara.netlify.app/' 
   },
   { 
     name: 'Zuñiga Agustina', 
     role: 'Diseñadora UI/UX', 
     photo: '/img/agustina-photo.jpg', // Revisa esta ruta
-    githubUrl: 'https://github.com/agustina-zuniga' 
+    githubUrl: 'https://portafolio-azuniga.netlify.app/' 
   },
   { 
     name: 'Silva Daniel', 
