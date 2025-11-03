@@ -1,29 +1,14 @@
 package agestion.servicios;
 
 import agestion.modelo.Parcela;
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 /**
- * GESTIÓN DE PARCELAS CON INTERFAZ DE SOLAPAS
- * 
- * Sistema completo para administrar parcelas agrícolas con
- * interfaz organizada en pestañas para diferentes operaciones.
- * 
- * @author Código Crítico 2025
- * @version 2.0
+ * GESTIÓN DE PARCELAS CON INTERFAZ DE SOLAPAS Y FONDO NEGRO
  */
 public class GestionParcelas {
 
@@ -36,18 +21,21 @@ public class GestionParcelas {
     private JTextArea areaParcelas;
     private JTextArea areaEstadisticas;
 
-    /**
-     * MUESTRA LA INTERFAZ COMPLETA CON SOLAPAS
-     */
     public void mostrarInterfazCompleta() {
         JDialog dialog = new JDialog();
         dialog.setTitle("Gestión de Parcelas - Administración de Terrenos");
         dialog.setModal(true);
-        dialog.setSize(800, 600);
+        dialog.setSize(1000, 700); // Tamaño aumentado
         dialog.setLocationRelativeTo(null);
         dialog.setLayout(new BorderLayout());
+        
+        // FONDO NEGRO PARA EL DIÁLOGO PRINCIPAL
+        dialog.getContentPane().setBackground(Color.BLACK);
 
         JTabbedPane tabbedPane = new JTabbedPane();
+        // FONDO NEGRO PARA EL TABBEDPANE
+        tabbedPane.setBackground(Color.BLACK);
+        tabbedPane.setForeground(Color.WHITE); // Texto blanco en pestañas
         
         // Agregar solapas
         tabbedPane.addTab("🌿 Agregar Parcela", crearPanelAgregarParcela());
@@ -64,29 +52,40 @@ public class GestionParcelas {
         dialog.setVisible(true);
     }
 
-    /**
-     * CREA EL PANEL PARA AGREGAR PARCELAS
-     */
     private JPanel crearPanelAgregarParcela() {
         JPanel panel = new JPanel(new GridLayout(0, 2, 10, 10));
-        panel.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        panel.setBackground(Color.BLACK); // FONDO NEGRO
 
         inicializarComponentes();
 
-        // Nombre de la parcela
-        panel.add(new JLabel("Nombre de la parcela:"));
+        // Configurar colores para los componentes
+        JLabel lblNombre = new JLabel("Nombre de la parcela:");
+        lblNombre.setForeground(Color.WHITE);
+        panel.add(lblNombre);
+        txtNombreParcela.setBackground(Color.DARK_GRAY);
+        txtNombreParcela.setForeground(Color.WHITE);
         panel.add(txtNombreParcela);
 
-        // Tipo de cultivo
-        panel.add(new JLabel("Tipo de cultivo:"));
+        JLabel lblCultivo = new JLabel("Tipo de cultivo:");
+        lblCultivo.setForeground(Color.WHITE);
+        panel.add(lblCultivo);
+        txtTipoCultivo.setBackground(Color.DARK_GRAY);
+        txtTipoCultivo.setForeground(Color.WHITE);
         panel.add(txtTipoCultivo);
 
-        // Superficie
-        panel.add(new JLabel("Superficie (hectáreas):"));
+        JLabel lblSuperficie = new JLabel("Superficie (hectáreas):");
+        lblSuperficie.setForeground(Color.WHITE);
+        panel.add(lblSuperficie);
+        txtSuperficie.setBackground(Color.DARK_GRAY);
+        txtSuperficie.setForeground(Color.WHITE);
         panel.add(txtSuperficie);
 
-        // Botón de agregar
+        // Botón de agregar con estilo oscuro
         JButton btnAgregar = new JButton("✅ Agregar Parcela");
+        btnAgregar.setBackground(new Color(0, 100, 0)); // Verde oscuro
+        btnAgregar.setForeground(Color.WHITE);
+        btnAgregar.setFocusPainted(false);
         btnAgregar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -99,24 +98,27 @@ public class GestionParcelas {
         return panel;
     }
 
-    /**
-     * CREA EL PANEL DE LISTA DE PARCELAS
-     */
     private JPanel crearPanelListaParcelas() {
         JPanel panel = new JPanel(new BorderLayout());
-        panel.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        panel.setBackground(Color.BLACK); // FONDO NEGRO
 
         areaParcelas = new JTextArea(20, 50);
         areaParcelas.setEditable(false);
-        areaParcelas.setFont(new java.awt.Font("Monospaced", java.awt.Font.PLAIN, 12));
+        areaParcelas.setFont(new Font("Monospaced", Font.PLAIN, 12));
+        areaParcelas.setBackground(Color.DARK_GRAY); // Fondo oscuro para el área de texto
+        areaParcelas.setForeground(Color.WHITE); // Texto blanco
+        areaParcelas.setCaretColor(Color.WHITE); // Cursor blanco
         
         JScrollPane scrollPane = new JScrollPane(areaParcelas);
+        scrollPane.getViewport().setBackground(Color.DARK_GRAY);
         panel.add(scrollPane, BorderLayout.CENTER);
 
-        // Botones de control
+        // Botones de control con estilo oscuro
         JPanel panelBotones = new JPanel();
+        panelBotones.setBackground(Color.BLACK);
         
-        JButton btnActualizar = new JButton("🔄 Actualizar Lista");
+        JButton btnActualizar = crearBotonOscuro("🔄 Actualizar Lista");
         btnActualizar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -124,7 +126,7 @@ public class GestionParcelas {
             }
         });
         
-        JButton btnExportar = new JButton("💾 Exportar Lista");
+        JButton btnExportar = crearBotonOscuro("💾 Exportar Lista");
         btnExportar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -132,7 +134,7 @@ public class GestionParcelas {
             }
         });
         
-        JButton btnLimpiar = new JButton("🗑️ Limpiar Todo");
+        JButton btnLimpiar = crearBotonOscuro("🗑️ Limpiar Todo");
         btnLimpiar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -151,21 +153,22 @@ public class GestionParcelas {
         return panel;
     }
 
-    /**
-     * CREA EL PANEL DE ESTADÍSTICAS
-     */
     private JPanel crearPanelEstadisticas() {
         JPanel panel = new JPanel(new BorderLayout());
-        panel.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        panel.setBackground(Color.BLACK); // FONDO NEGRO
 
         areaEstadisticas = new JTextArea(15, 50);
         areaEstadisticas.setEditable(false);
-        areaEstadisticas.setFont(new java.awt.Font("Monospaced", java.awt.Font.PLAIN, 12));
+        areaEstadisticas.setFont(new Font("Monospaced", Font.PLAIN, 12));
+        areaEstadisticas.setBackground(Color.DARK_GRAY);
+        areaEstadisticas.setForeground(Color.WHITE);
+        areaEstadisticas.setCaretColor(Color.WHITE);
         
         panel.add(new JScrollPane(areaEstadisticas), BorderLayout.CENTER);
 
         // Botón para actualizar estadísticas
-        JButton btnActualizar = new JButton("📊 Actualizar Estadísticas");
+        JButton btnActualizar = crearBotonOscuro("📊 Actualizar Estadísticas");
         btnActualizar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -174,6 +177,7 @@ public class GestionParcelas {
         });
         
         JPanel panelBoton = new JPanel();
+        panelBoton.setBackground(Color.BLACK);
         panelBoton.add(btnActualizar);
         panel.add(panelBoton, BorderLayout.SOUTH);
 
@@ -183,16 +187,17 @@ public class GestionParcelas {
         return panel;
     }
 
-    /**
-     * CREA EL PANEL DE MAPA DE CULTIVOS (SIMULACIÓN)
-     */
     private JPanel crearPanelMapaCultivos() {
         JPanel panel = new JPanel(new BorderLayout());
-        panel.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        panel.setBackground(Color.BLACK); // FONDO NEGRO
 
         JTextArea areaMapa = new JTextArea();
         areaMapa.setEditable(false);
-        areaMapa.setFont(new java.awt.Font("Monospaced", java.awt.Font.PLAIN, 12));
+        areaMapa.setFont(new Font("Monospaced", Font.PLAIN, 12));
+        areaMapa.setBackground(Color.DARK_GRAY);
+        areaMapa.setForeground(Color.WHITE);
+        areaMapa.setCaretColor(Color.WHITE);
         
         // Generar mapa simulado
         String mapa = generarMapaCultivos();
@@ -201,23 +206,40 @@ public class GestionParcelas {
         panel.add(new JScrollPane(areaMapa), BorderLayout.CENTER);
 
         JLabel lblInfo = new JLabel("🗺️ Vista previa del mapa de cultivos (simulación)");
+        lblInfo.setForeground(Color.WHITE);
         panel.add(lblInfo, BorderLayout.NORTH);
 
         return panel;
     }
 
-    /**
-     * INICIALIZA LOS COMPONENTES DE LA INTERFAZ
-     */
+    // MÉTODO AUXILIAR PARA CREAR BOTONES CON ESTILO OSCURO
+    private JButton crearBotonOscuro(String texto) {
+        JButton boton = new JButton(texto);
+        boton.setBackground(new Color(50, 50, 50)); // Gris oscuro
+        boton.setForeground(Color.WHITE);
+        boton.setFocusPainted(false);
+        boton.setBorderPainted(false);
+        
+        // Efecto hover
+        boton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                boton.setBackground(new Color(70, 70, 70));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                boton.setBackground(new Color(50, 50, 50));
+            }
+        });
+        
+        return boton;
+    }
+
+    // ... (el resto de los métodos se mantienen igual, solo cambia la estética)
     private void inicializarComponentes() {
         txtNombreParcela = new JTextField();
         txtTipoCultivo = new JTextField();
         txtSuperficie = new JTextField();
     }
 
-    /**
-     * AGREGA UNA PARCELA DESDE LA INTERFAZ
-     */
     private void agregarParcelaDesdeInterfaz() {
         try {
             // Validaciones
@@ -262,9 +284,6 @@ public class GestionParcelas {
         }
     }
 
-    /**
-     * ACTUALIZA LA LISTA DE PARCELAS
-     */
     private void actualizarListaParcelas() {
         if (listaParcelas.isEmpty()) {
             areaParcelas.setText("No hay parcelas registradas.");
@@ -285,9 +304,6 @@ public class GestionParcelas {
         areaParcelas.setText(lista.toString());
     }
 
-    /**
-     * ACTUALIZA LAS ESTADÍSTICAS
-     */
     private void actualizarEstadisticas() {
         if (listaParcelas.isEmpty()) {
             areaEstadisticas.setText("No hay parcelas para calcular estadísticas.");
@@ -329,9 +345,6 @@ public class GestionParcelas {
         areaEstadisticas.setText(stats.toString());
     }
 
-    /**
-     * GENERA UN MAPA SIMULADO DE CULTIVOS
-     */
     private String generarMapaCultivos() {
         if (listaParcelas.isEmpty()) {
             return "No hay parcelas para mostrar en el mapa.";
@@ -358,9 +371,6 @@ public class GestionParcelas {
         return mapa.toString();
     }
 
-    /**
-     * OBTIENE SÍMBOLO PARA EL TIPO DE CULTIVO
-     */
     private String obtenerSimboloCultivo(String tipoCultivo) {
         if (tipoCultivo.toLowerCase().contains("viñedo") || tipoCultivo.toLowerCase().contains("uva")) {
             return "🌿";
@@ -375,18 +385,12 @@ public class GestionParcelas {
         }
     }
 
-    /**
-     * EXPORTA LA LISTA DE PARCELAS (SIMULACIÓN)
-     */
     private void exportarListaParcelas() {
         JOptionPane.showMessageDialog(null, 
             "Función de exportación en desarrollo.\nLa lista se exportará a archivo CSV.", 
             "Exportar", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    /**
-     * LIMPIA TODAS LAS PARCELAS (CONFIRMACIÓN)
-     */
     private void limpiarParcelas() {
         if (listaParcelas.isEmpty()) {
             JOptionPane.showMessageDialog(null, "No hay parcelas para limpiar.", "Información", JOptionPane.INFORMATION_MESSAGE);
@@ -406,22 +410,17 @@ public class GestionParcelas {
         }
     }
 
-    /**
-     * LIMPIA LOS CAMPOS DEL FORMULARIO
-     */
     private void limpiarCamposParcela() {
         txtNombreParcela.setText("");
         txtTipoCultivo.setText("");
         txtSuperficie.setText("");
     }
 
-    /**
-     * CREA EL PANEL DE BOTONES
-     */
     private JPanel crearPanelBotones(JDialog dialog) {
         JPanel panel = new JPanel();
+        panel.setBackground(Color.BLACK);
         
-        JButton btnCerrar = new JButton("Cerrar");
+        JButton btnCerrar = crearBotonOscuro("Cerrar");
         btnCerrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -433,23 +432,15 @@ public class GestionParcelas {
         return panel;
     }
 
-    /**
-     * MÉTODO COMPATIBLE CON VERSIÓN ANTERIOR
-     */
+    // MÉTODOS COMPATIBLES CON VERSIÓN ANTERIOR
     public void agregarParcela() {
         mostrarInterfazCompleta();
     }
 
-    /**
-     * MÉTODO COMPATIBLE CON VERSIÓN ANTERIOR
-     */
     public void mostrarParcelas() {
         mostrarInterfazCompleta();
     }
 
-    /**
-     * MÉTODO COMPATIBLE CON VERSIÓN ANTERIOR - Para otras clases
-     */
     public ArrayList<Parcela> getListaParcelas() {
         return this.listaParcelas;
     }

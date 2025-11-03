@@ -1,4 +1,4 @@
-// Main.java - VERSIÓN ACTUALIZADA
+// Main.java - VERSIÓN CON BOTONES MÁS ANCHOS Y SOPORTE TÉCNICO MEJORADO
 package agestion.main;
 
 import agestion.dao.DatabaseConnection;
@@ -10,9 +10,10 @@ import java.lang.management.MemoryUsage;
 import javax.swing.*;
 
 /**
- * APLICACIÓN PRINCIPAL - AGRO GESTIÓN INTEGRAL v2.0
+ * APLICACIÓN PRINCIPAL - AGRO GESTIÓN INTEGRAL v2.5
  * 
  * Sistema completo de gestión agrícola con interfaz moderna y panel lateral.
+ * Versión con botones más anchos y pantalla de soporte técnico optimizada.
  * 
  * @author Código Crítico 2025
  * @version 2.5
@@ -39,7 +40,7 @@ public class Main {
      * MÉTODO PRINCIPAL - Punto de entrada de la aplicación
      */
     public static void main(String[] args) {
-        System.out.println("🚀 Iniciando Agro Gestión Integral v2.0...");
+        System.out.println("🚀 Iniciando Agro Gestión Integral v2.5...");
 
         // Verificar requisitos del sistema
         if (!verificarRequisitosSistema()) {
@@ -112,8 +113,8 @@ public class Main {
             // Usar el Look and Feel del sistema para apariencia nativa
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
-            // Configurar fuentes
-            Font fuenteDefault = new Font("Segoe UI", Font.PLAIN, 12);
+            // Configurar fuentes optimizadas para 1024x768
+            Font fuenteDefault = new Font("Segoe UI", Font.PLAIN, 11);
             UIManager.put("Button.font", fuenteDefault);
             UIManager.put("Label.font", fuenteDefault);
             UIManager.put("TextField.font", fuenteDefault);
@@ -158,7 +159,7 @@ public class Main {
      */
     private static void mostrarInstruccionesSolucion() {
         String mensaje = 
-            "<html><body style='width: 500px;'>" +
+            "<html><body style='width: 450px;'>" +
             "<h3>🔧 Solución de Problemas de Base de Datos</h3>" +
             "<p><b>Problema:</b> No se encuentran los drivers JDBC</p>" +
             "<p><b>Solución:</b></p>" +
@@ -212,29 +213,29 @@ public class Main {
     }
 
     /**
-     * CREA LA INTERFAZ GRÁFICA CON PANEL LATERAL Y CENTRO CON LOGO
+     * CREA LA INTERFAZ GRÁFICA CON PANEL LATERAL MÁS ANCHO
      */
     private static void crearInterfazGrafica() {
-        System.out.println("🎨 Creando interfaz gráfica con panel lateral...");
+        System.out.println("🎨 Creando interfaz gráfica con panel lateral MÁS ANCHO...");
 
-        // Crear ventana principal - MÁS GRANDE
-        frame = new JFrame("Agro Gestión Integral v2.0");
+        // Crear ventana principal
+        frame = new JFrame("Agro Gestión Integral v2.5");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setMinimumSize(new Dimension(1400, 800)); // Pantalla más grande
-        frame.setPreferredSize(new Dimension(1400, 800)); // Tamaño preferido más grande
+        frame.setMinimumSize(new Dimension(1100, 730)); // AUMENTADO para panel lateral más ancho
+        frame.setPreferredSize(new Dimension(1100, 730));
         frame.setLayout(new BorderLayout());
 
-        // FONDO NEGRO PARA LA VENTANA PRINCIPAL
+        // Fondo negro para la ventana principal
         frame.getContentPane().setBackground(Color.BLACK);
 
-        // Crear panel lateral con botones
+        // Crear panel lateral MÁS ANCHO con botones
         panelLateral = crearPanelLateral();
         frame.add(panelLateral, BorderLayout.WEST);
 
         // Crear panel de contenido con CardLayout y logo central
         cardLayout = new CardLayout();
         panelContenido = new JPanel(cardLayout);
-        panelContenido.setBackground(Color.BLACK); // Fondo negro
+        panelContenido.setBackground(Color.BLACK);
         
         // Agregar panel de bienvenida con logo
         JPanel panelBienvenida = crearPanelBienvenida();
@@ -244,17 +245,17 @@ public class Main {
 
         // Configurar ventana
         frame.pack();
-        frame.setLocationRelativeTo(null); // Centrar en pantalla
+        frame.setLocationRelativeTo(null);
     }
 
     /**
-     * CREA EL PANEL DE BIENVENIDA CON LOGO CENTRAL - 800x800 PÍXELES
+     * CREA EL PANEL DE BIENVENIDA CON LOGO CENTRAL
      */
     private static JPanel crearPanelBienvenida() {
         JPanel panel = new JPanel(new BorderLayout());
-        panel.setBackground(Color.BLACK); // Fondo negro
+        panel.setBackground(Color.BLACK);
         
-        // Cargar y mostrar el logo4.jpg en el centro - 800x800 PÍXELES
+        // Cargar y mostrar el logo4.jpg en el centro
         ImageIcon logoIcon = cargarLogoCentral();
         if (logoIcon != null) {
             JLabel labelLogo = new JLabel(logoIcon);
@@ -262,24 +263,24 @@ public class Main {
             panel.add(labelLogo, BorderLayout.CENTER);
         } else {
             // Fallback si no se encuentra la imagen
-            JLabel labelTitulo = new JLabel("BIENVENIDO A AGRO GESTIÓN INTEGRAL v2.5", JLabel.CENTER);
-            labelTitulo.setFont(new Font("Segoe UI", Font.BOLD, 24));
-            labelTitulo.setForeground(Color.WHITE); // Texto blanco sobre fondo negro
+            JLabel labelTitulo = new JLabel("AGRO GESTIÓN INTEGRAL v2.5", JLabel.CENTER);
+            labelTitulo.setFont(new Font("Segoe UI", Font.BOLD, 20));
+            labelTitulo.setForeground(Color.WHITE);
             panel.add(labelTitulo, BorderLayout.CENTER);
         }
         
         // Mensaje de bienvenida en la parte inferior
         JLabel labelMensaje = new JLabel("Seleccione una opción del menú lateral para comenzar", JLabel.CENTER);
-        labelMensaje.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        labelMensaje.setForeground(Color.WHITE); // Texto blanco sobre fondo negro
-        labelMensaje.setBorder(BorderFactory.createEmptyBorder(20, 20, 40, 20));
+        labelMensaje.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        labelMensaje.setForeground(Color.WHITE);
+        labelMensaje.setBorder(BorderFactory.createEmptyBorder(15, 15, 25, 15));
         panel.add(labelMensaje, BorderLayout.SOUTH);
         
         return panel;
     }
 
     /**
-     * CARGA EL LOGO CENTRAL (logo4.jpg) - 800x800 PÍXELES
+     * CARGA EL LOGO CENTRAL (logo4.jpg)
      */
     private static ImageIcon cargarLogoCentral() {
         try {
@@ -288,9 +289,9 @@ public class Main {
             
             if (imageUrl != null) {
                 ImageIcon originalIcon = new ImageIcon(imageUrl);
-                // Escalar a 800x800 píxeles
+                // Escalar a 600x600 píxeles
                 Image image = originalIcon.getImage();
-                Image scaledImage = image.getScaledInstance(800, 800, Image.SCALE_SMOOTH);
+                Image scaledImage = image.getScaledInstance(600, 600, Image.SCALE_SMOOTH);
                 return new ImageIcon(scaledImage);
             } else {
                 System.err.println("❌ No se pudo encontrar el archivo logo4.jpg");
@@ -303,7 +304,7 @@ public class Main {
     }
 
     /**
-     * CREA EL PANEL LATERAL CON BOTONES DE NAVEGACIÓN
+     * CREA EL PANEL LATERAL CON BOTONES MÁS ANCHOS
      */
     private static JPanel crearPanelLateral() {
         JPanel panel = new JPanel();
@@ -312,13 +313,14 @@ public class Main {
         // Color de fondo
         panel.setBackground(new Color(50, 50, 50));
         
-        // PANEL ANCHO para botones
-        panel.setPreferredSize(new Dimension(280, 600));
-        panel.setBorder(BorderFactory.createEmptyBorder(15, 15, 20, 15));
+        // PANEL LATERAL MÁS ANCHO para botones más grandes
+        panel.setPreferredSize(new Dimension(300, 650)); // AUMENTADO de 220 a 300
+        panel.setBorder(BorderFactory.createEmptyBorder(12, 15, 15, 15)); // Márgenes ajustados
 
-        // BOTONES DE NAVEGACIÓN - SUBIDOS MÁS ARRIBA
+        // BOTONES DE NAVEGACIÓN - TEXTO COMPLETO
         String[] botones = {
             "🌱 Cuaderno de Campo", 
+            "🏞️ Gestión de Parcelas",    
             "🚜 Cosecha y Transporte", 
             "👥 Personal", 
             "💧 Riego y Fertilización", 
@@ -332,7 +334,7 @@ public class Main {
         for (String textoBoton : botones) {
             JButton boton = crearBotonLateral(textoBoton);
             panel.add(boton);
-            panel.add(Box.createRigidArea(new Dimension(0, 8))); // Menos espacio entre botones
+            panel.add(Box.createRigidArea(new Dimension(0, 6)));
         }
 
         // Espacio flexible para empujar los botones hacia arriba
@@ -342,16 +344,16 @@ public class Main {
     }
 
     /**
-     * CREA UN BOTÓN ESTILIZADO CON IMAGEN ALINEADA A LA IZQUIERDA
+     * CREA UN BOTÓN ESTILIZADO MÁS ANCHO CON IMAGEN Y TEXTO COMPLETO
      */
     private static JButton crearBotonLateral(String texto) {
         JButton boton = new JButton(texto);
-        boton.setAlignmentX(Component.LEFT_ALIGNMENT); // Alinear a la izquierda
+        boton.setAlignmentX(Component.LEFT_ALIGNMENT);
         
-        // Tamaño de botones
-        boton.setMaximumSize(new Dimension(250, 70));
-        boton.setMinimumSize(new Dimension(250, 70));
-        boton.setPreferredSize(new Dimension(250, 70));
+        // BOTONES MÁS ANCHOS para que entren imagen y texto completo
+        boton.setMaximumSize(new Dimension(270, 55)); // AUMENTADO de 200 a 270
+        boton.setMinimumSize(new Dimension(270, 55));
+        boton.setPreferredSize(new Dimension(270, 55));
         
         // Estilo base
         boton.setForeground(Color.WHITE);
@@ -359,27 +361,27 @@ public class Main {
         boton.setBorderPainted(false);
         boton.setFont(new Font("Segoe UI", Font.BOLD, 11));
 
-        // COLOR NEGRO PARA TODOS LOS BOTONES INCLUYENDO SALIR
+        // COLOR NEGRO PARA TODOS LOS BOTONES
         boton.setBackground(Color.BLACK);
 
-        // Cargar imagen - ALINEADA A LA IZQUIERDA
+        // Cargar imagen - MÁS ESPACIO PARA TEXTO
         ImageIcon icono = cargarIconoBoton(texto);
         if (icono != null) {
             boton.setIcon(icono);
             boton.setHorizontalTextPosition(SwingConstants.RIGHT);
-            boton.setIconTextGap(15);
-            boton.setHorizontalAlignment(SwingConstants.LEFT); // Alinear contenido a la izquierda
+            boton.setIconTextGap(15); // AUMENTADO espacio entre icono y texto
+            boton.setHorizontalAlignment(SwingConstants.LEFT);
         }
 
         // Efecto hover
         boton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                boton.setBackground(new Color(50, 50, 50)); // Gris oscuro al hover
+                boton.setBackground(new Color(50, 50, 50));
                 boton.setCursor(new Cursor(Cursor.HAND_CURSOR));
             }
 
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                boton.setBackground(Color.BLACK); // Volver al negro original
+                boton.setBackground(Color.BLACK);
                 boton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
             }
         });
@@ -400,6 +402,9 @@ public class Main {
         switch (textoBoton) {
             case "🌱 Cuaderno de Campo":
                 nombreArchivo = "cuaderno.jpg";
+                break;
+            case "🏞️ Gestión de Parcelas":
+                nombreArchivo = "parcelas.jpg";
                 break;
             case "🚜 Cosecha y Transporte":
                 nombreArchivo = "cosecha.jpg";
@@ -435,18 +440,44 @@ public class Main {
             
             if (imageUrl != null) {
                 ImageIcon originalIcon = new ImageIcon(imageUrl);
-                // Escalado a 60x60 píxeles
+                // Escalado a 50x50 píxeles
                 Image image = originalIcon.getImage();
-                Image scaledImage = image.getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+                Image scaledImage = image.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
                 return new ImageIcon(scaledImage);
             } else {
                 System.err.println("❌ No se pudo encontrar la imagen: " + nombreArchivo);
+                if (textoBoton.equals("🏞️ Gestión de Parcelas")) {
+                    return crearIconoPorDefecto();
+                }
                 return null;
             }
         } catch (Exception e) {
             System.err.println("❌ Error al cargar el icono para " + textoBoton + ": " + e.getMessage());
+            if (textoBoton.equals("🏞️ Gestión de Parcelas")) {
+                return crearIconoPorDefecto();
+            }
             return null;
         }
+    }
+
+    /**
+     * CREA UN ICONO POR DEFECTO PARA GESTIÓN DE PARCELAS
+     */
+    private static ImageIcon crearIconoPorDefecto() {
+        java.awt.image.BufferedImage imagen = new java.awt.image.BufferedImage(50, 50, java.awt.image.BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = imagen.createGraphics();
+        
+        // Fondo verde
+        g2d.setColor(new Color(0, 100, 0));
+        g2d.fillRect(0, 0, 50, 50);
+        
+        // Texto "PARC"
+        g2d.setColor(Color.WHITE);
+        g2d.setFont(new Font("Segoe UI", Font.BOLD, 11));
+        g2d.drawString("PARC", 10, 30);
+        
+        g2d.dispose();
+        return new ImageIcon(imagen);
     }
 
     /**
@@ -461,6 +492,13 @@ public class Main {
                     gestionCampo.mostrarInterfazCompleta();
                 } else {
                     mostrarServicioNoDisponible("Cuaderno de Campo");
+                }
+                break;
+            case "🏞️ Gestión de Parcelas":
+                if (gestionParcelas != null) {
+                    gestionParcelas.mostrarInterfazCompleta();
+                } else {
+                    mostrarServicioNoDisponible("Gestión de Parcelas");
                 }
                 break;
             case "🚜 Cosecha y Transporte":
@@ -530,13 +568,14 @@ public class Main {
     }
 
     /**
-     * MUESTRA INFORMACIÓN DE SOPORTE TÉCNICO CON FONDO NEGRO - MÁS GRANDE SIN SCROLL
+     * MUESTRA INFORMACIÓN DE SOPORTE TÉCNICO MEJORADA
+     * CON INFORMACIÓN DEL SISTEMA MÁS ARRIBA Y CENTRADA
      */
     private static void mostrarSoporteTecnico() {
         try {
             JDialog dialogoSoporte = new JDialog(frame, "Soporte Técnico - Código Crítico", true);
             dialogoSoporte.setLayout(new BorderLayout());
-            dialogoSoporte.setPreferredSize(new Dimension(1000, 800)); // Pantalla más grande
+            dialogoSoporte.setPreferredSize(new Dimension(850, 650));
             
             // FONDO NEGRO
             dialogoSoporte.getContentPane().setBackground(Color.BLACK);
@@ -544,9 +583,9 @@ public class Main {
             // Panel principal con fondo negro
             JPanel panelSoporte = new JPanel(new BorderLayout(20, 20));
             panelSoporte.setBackground(Color.BLACK);
-            panelSoporte.setBorder(BorderFactory.createEmptyBorder(25, 25, 25, 25));
+            panelSoporte.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-            // Cargar y mostrar la imagen del logo - 100x100 PÍXELES
+            // Cargar y mostrar la imagen del logo
             ImageIcon logoIcon = cargarLogoSoporte();
             JLabel labelLogo = null;
             if (logoIcon != null) {
@@ -554,12 +593,12 @@ public class Main {
             } else {
                 labelLogo = new JLabel("CÓDIGO CRÍTICO");
                 labelLogo.setForeground(Color.WHITE);
-                labelLogo.setFont(new Font("Segoe UI", Font.BOLD, 20));
+                labelLogo.setFont(new Font("Segoe UI", Font.BOLD, 18));
             }
             labelLogo.setHorizontalAlignment(JLabel.CENTER);
             panelSoporte.add(labelLogo, BorderLayout.NORTH);
 
-            // Panel de contenido principal SIN SCROLL
+            // Panel de contenido principal
             JPanel panelContenidoSoporte = new JPanel();
             panelContenidoSoporte.setLayout(new BoxLayout(panelContenidoSoporte, BoxLayout.Y_AXIS));
             panelContenidoSoporte.setBackground(Color.BLACK);
@@ -567,23 +606,65 @@ public class Main {
             // Título
             JLabel titulo = new JLabel("EQUIPO DE SOPORTE TÉCNICO - CÓDIGO CRÍTICO 2025");
             titulo.setForeground(Color.WHITE);
-            titulo.setFont(new Font("Segoe UI", Font.BOLD, 18));
+            titulo.setFont(new Font("Segoe UI", Font.BOLD, 16));
             titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
             panelContenidoSoporte.add(titulo);
-            panelContenidoSoporte.add(Box.createRigidArea(new Dimension(0, 25)));
+            panelContenidoSoporte.add(Box.createRigidArea(new Dimension(0, 20)));
             
-            // Subtítulo
+            // =============================================
+            // INFORMACIÓN DEL SISTEMA - MÁS ARRIBA Y CENTRADA
+            // =============================================
+            JPanel panelInfoSistemaContainer = new JPanel();
+            panelInfoSistemaContainer.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+            panelInfoSistemaContainer.setBackground(Color.BLACK);
+            panelInfoSistemaContainer.setAlignmentX(Component.CENTER_ALIGNMENT);
+            
+            // Panel para información del sistema CENTRADA
+            JPanel panelInfoSistema = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 5));
+            panelInfoSistema.setBackground(Color.BLACK);
+            panelInfoSistema.setBorder(BorderFactory.createLineBorder(new Color(80, 80, 80), 1));
+            panelInfoSistema.setMaximumSize(new Dimension(400, 40));
+            
+            // Información del sistema en componentes separados pero CENTRADOS
+            JLabel versionLabel = new JLabel("📋 Versión: 2.5");
+            versionLabel.setForeground(Color.WHITE);
+            versionLabel.setFont(new Font("Segoe UI", Font.BOLD, 12));
+            
+            JLabel fechaLabel = new JLabel("📅 Fecha: Noviembre 2025");
+            fechaLabel.setForeground(Color.WHITE);
+            fechaLabel.setFont(new Font("Segoe UI", Font.BOLD, 12));
+            
+            JLabel javaLabel = new JLabel("☕ Java: 15 + SQLite + Swing");
+            javaLabel.setForeground(Color.WHITE);
+            javaLabel.setFont(new Font("Segoe UI", Font.BOLD, 12));
+            
+            // Agregar componentes al panel de información CENTRADA
+            panelInfoSistema.add(versionLabel);
+            panelInfoSistema.add(Box.createRigidArea(new Dimension(15, 0)));
+            panelInfoSistema.add(fechaLabel);
+            panelInfoSistema.add(Box.createRigidArea(new Dimension(15, 0)));
+            panelInfoSistema.add(javaLabel);
+            
+            panelInfoSistemaContainer.add(panelInfoSistema);
+            panelContenidoSoporte.add(panelInfoSistemaContainer);
+            panelContenidoSoporte.add(Box.createRigidArea(new Dimension(0, 20)));
+            
+            // Subtítulo de contactos (AHORA DESPUÉS de la información del sistema)
             JLabel subtitulo = new JLabel("Contactos del equipo de desarrollo:");
             subtitulo.setForeground(Color.WHITE);
-            subtitulo.setFont(new Font("Segoe UI", Font.BOLD, 14));
+            subtitulo.setFont(new Font("Segoe UI", Font.BOLD, 13));
             subtitulo.setAlignmentX(Component.LEFT_ALIGNMENT);
             panelContenidoSoporte.add(subtitulo);
-            panelContenidoSoporte.add(Box.createRigidArea(new Dimension(0, 15)));
+            panelContenidoSoporte.add(Box.createRigidArea(new Dimension(0, 12)));
             
-            // Cargar icono de email - 40x40 PÍXELES
+            // Cargar icono de email
             ImageIcon emailIcon = cargarEmailIcon();
             
-            // Lista de TODOS LOS INTEGRANTES con iconos de email
+            // Panel para contactos en dos columnas
+            JPanel panelContactosGrid = new JPanel(new GridLayout(0, 2, 12, 8));
+            panelContactosGrid.setBackground(Color.BLACK);
+            
+            // Lista de TODOS LOS INTEGRANTES
             String[][] integrantes = {
                 {"Mazara Ariel", "arielmazara@gmail.com"},
                 {"Zuñiga Agustina", "agustinavictoriazuniga@gmail.com"},
@@ -595,16 +676,12 @@ public class Main {
                 {"Ponce de Leon Damian", "poncedeleondamianadolfo@gmail.com"}
             };
             
-            // Panel para contactos en dos columnas
-            JPanel panelContactosGrid = new JPanel(new GridLayout(0, 2, 15, 8));
-            panelContactosGrid.setBackground(Color.BLACK);
-            
             for (String[] integrante : integrantes) {
                 String nombre = integrante[0];
                 String email = integrante[1];
                 
                 // Panel para cada integrante
-                JPanel panelIntegrante = new JPanel(new BorderLayout(10, 5));
+                JPanel panelIntegrante = new JPanel(new BorderLayout(8, 5));
                 panelIntegrante.setBackground(Color.BLACK);
                 panelIntegrante.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
                 
@@ -623,11 +700,11 @@ public class Main {
                 
                 JLabel labelNombre = new JLabel(nombre);
                 labelNombre.setForeground(Color.WHITE);
-                labelNombre.setFont(new Font("Segoe UI", Font.BOLD, 12));
+                labelNombre.setFont(new Font("Segoe UI", Font.BOLD, 11));
                 
                 JLabel labelEmail = new JLabel(email);
                 labelEmail.setForeground(Color.WHITE);
-                labelEmail.setFont(new Font("Segoe UI", Font.PLAIN, 11));
+                labelEmail.setFont(new Font("Segoe UI", Font.PLAIN, 10));
                 
                 panelDatos.add(labelNombre);
                 panelDatos.add(Box.createRigidArea(new Dimension(0, 2)));
@@ -641,34 +718,12 @@ public class Main {
             
             panelContenidoSoporte.add(panelContactosGrid);
             
-            // Información del sistema
-            panelContenidoSoporte.add(Box.createRigidArea(new Dimension(0, 25)));
-            JLabel infoSistema = new JLabel("📋 Información del sistema:");
-            infoSistema.setForeground(Color.WHITE);
-            infoSistema.setFont(new Font("Segoe UI", Font.BOLD, 14));
-            infoSistema.setAlignmentX(Component.LEFT_ALIGNMENT);
-            panelContenidoSoporte.add(infoSistema);
-            
-            String[] info = {
-                "Versión: 2.5",
-                "Fecha: Noviembre 2025", 
-                "Java: 15 + SQLITE-JDBC + Swing UI"
-            };
-            
-            for (String line : info) {
-                JLabel labelInfo = new JLabel(line);
-                labelInfo.setForeground(Color.WHITE);
-                labelInfo.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-                labelInfo.setAlignmentX(Component.LEFT_ALIGNMENT);
-                panelContenidoSoporte.add(labelInfo);
-                panelContenidoSoporte.add(Box.createRigidArea(new Dimension(0, 5)));
-            }
-            
-            panelContenidoSoporte.add(Box.createRigidArea(new Dimension(0, 15)));
+            // Nota importante
+            panelContenidoSoporte.add(Box.createRigidArea(new Dimension(0, 20)));
             JLabel nota = new JLabel("⚠️  Para reportar errores o sugerencias, contactar a cualquier miembro del equipo.");
             nota.setForeground(Color.YELLOW);
-            nota.setFont(new Font("Segoe UI", Font.ITALIC, 12));
-            nota.setAlignmentX(Component.LEFT_ALIGNMENT);
+            nota.setFont(new Font("Segoe UI", Font.ITALIC, 11));
+            nota.setAlignmentX(Component.CENTER_ALIGNMENT); // CENTRADA
             panelContenidoSoporte.add(nota);
 
             // Panel para centrar el contenido
@@ -681,24 +736,24 @@ public class Main {
             
             panelSoporte.add(panelCentro, BorderLayout.CENTER);
 
-            // Botón de cerrar - COLOR ROJO CON LETRAS BLANCAS
+            // Botón de cerrar
             JPanel panelBoton = new JPanel();
             panelBoton.setBackground(Color.BLACK);
             JButton btnCerrar = new JButton("Cerrar");
-            btnCerrar.setBackground(new Color(200, 0, 0)); // Rojo
-            btnCerrar.setForeground(Color.WHITE); // Letras blancas
+            btnCerrar.setBackground(new Color(200, 0, 0));
+            btnCerrar.setForeground(Color.WHITE);
             btnCerrar.setFocusPainted(false);
             btnCerrar.setFont(new Font("Segoe UI", Font.BOLD, 12));
-            btnCerrar.setPreferredSize(new Dimension(120, 35));
+            btnCerrar.setPreferredSize(new Dimension(110, 32));
             
             // Efecto hover para botón rojo
             btnCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
                 public void mouseEntered(java.awt.event.MouseEvent evt) {
-                    btnCerrar.setBackground(new Color(220, 0, 0)); // Rojo más claro al hover
+                    btnCerrar.setBackground(new Color(220, 0, 0));
                 }
 
                 public void mouseExited(java.awt.event.MouseEvent evt) {
-                    btnCerrar.setBackground(new Color(200, 0, 0)); // Volver al rojo original
+                    btnCerrar.setBackground(new Color(200, 0, 0));
                 }
             });
             
@@ -725,7 +780,8 @@ public class Main {
                 "• Baz Samira - bazsamira79@gmail.com\n" +
                 "• Mendez Oscar - Oreomendez99@gmail.com\n" +
                 "• Mamani Santino - santinomamani25@gmail.com\n" +
-                "• Ponce de Leon Damian - poncedeleondamianadolfo@gmail.com";
+                "• Ponce de Leon Damian - poncedeleondamianadolfo@gmail.com\n\n" +
+                "Información del sistema: Versión: 2.5 | Fecha: Noviembre 2025 | Java: 15 + SQLite + Swing";
 
             JOptionPane.showMessageDialog(frame, infoBasica, 
                 "Soporte Técnico - Código Crítico", 
@@ -734,7 +790,7 @@ public class Main {
     }
 
     /**
-     * CARGA EL LOGO PARA SOPORTE TÉCNICO - 100x100 PÍXELES
+     * CARGA EL LOGO PARA SOPORTE TÉCNICO
      */
     private static ImageIcon cargarLogoSoporte() {
         try {
@@ -743,9 +799,9 @@ public class Main {
             
             if (imageUrl != null) {
                 ImageIcon originalIcon = new ImageIcon(imageUrl);
-                // ESCALADO A 100x100 PÍXELES
+                // Escalado a 90x90 píxeles
                 Image image = originalIcon.getImage();
-                Image scaledImage = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+                Image scaledImage = image.getScaledInstance(90, 90, Image.SCALE_SMOOTH);
                 return new ImageIcon(scaledImage);
             } else {
                 System.err.println("❌ No se pudo encontrar el archivo codigocritico.jpg");
@@ -758,7 +814,7 @@ public class Main {
     }
 
     /**
-     * CARGA EL ICONO DE EMAIL - 40x40 PÍXELES
+     * CARGA EL ICONO DE EMAIL
      */
     private static ImageIcon cargarEmailIcon() {
         try {
@@ -767,9 +823,9 @@ public class Main {
             
             if (imageUrl != null) {
                 ImageIcon originalIcon = new ImageIcon(imageUrl);
-                // Escalar a 40x40 píxeles
+                // Escalar a 35x35 píxeles
                 Image image = originalIcon.getImage();
-                Image scaledImage = image.getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+                Image scaledImage = image.getScaledInstance(35, 35, Image.SCALE_SMOOTH);
                 return new ImageIcon(scaledImage);
             } else {
                 System.err.println("❌ No se pudo encontrar el archivo email.jpg");
@@ -786,7 +842,7 @@ public class Main {
      */
     private static void confirmarSalida() {
         int confirmacion = JOptionPane.showConfirmDialog(frame,
-            "<html><body style='width: 300px;'>" +
+            "<html><body style='width: 280px;'>" +
             "<h3>🚪 Confirmar Salida</h3>" +
             "<p>¿Está seguro de que desea salir de la aplicación?</p>" +
             "</body></html>",
@@ -806,17 +862,19 @@ public class Main {
         frame.setVisible(true);
         System.out.println("✅ Aplicación iniciada correctamente");
 
-        // Mostrar mensaje de bienvenida personalizado con logo y margen
+        // Mostrar mensaje de bienvenida optimizado
         SwingUtilities.invokeLater(() -> {
-            // Crear panel personalizado para el mensaje de bienvenida
-            JPanel panelBienvenida = new JPanel(new BorderLayout(20, 20));
+            JPanel panelBienvenida = new JPanel(new BorderLayout(15, 15));
             panelBienvenida.setBackground(Color.WHITE);
-            panelBienvenida.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 30)); // Margen derecho de 30
+            panelBienvenida.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 20));
             
-            // Cargar logo codigocritico 100x100
+            // Cargar logo codigocritico
             ImageIcon logoBienvenida = cargarLogoSoporte();
             if (logoBienvenida != null) {
-                JLabel labelLogo = new JLabel(logoBienvenida);
+                // Re-escalar a 80x80
+                Image image = logoBienvenida.getImage();
+                Image scaledImage = image.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+                JLabel labelLogo = new JLabel(new ImageIcon(scaledImage));
                 panelBienvenida.add(labelLogo, BorderLayout.WEST);
             }
             
@@ -826,8 +884,8 @@ public class Main {
             panelTexto.setBackground(Color.WHITE);
             
             JLabel labelTitulo = new JLabel("¡Bienvenido a Agro Gestión Integral v2.5!");
-            labelTitulo.setFont(new Font("Segoe UI", Font.BOLD, 16));
-            labelTitulo.setForeground(new Color(0, 100, 0)); // Verde oscuro
+            labelTitulo.setFont(new Font("Segoe UI", Font.BOLD, 15));
+            labelTitulo.setForeground(new Color(0, 100, 0));
             
             JLabel labelMensaje1 = new JLabel("Sistema completo de gestión agrícola con interfaz moderna.");
             JLabel labelMensaje2 = new JLabel("Use el panel lateral para navegar por los módulos.");
@@ -836,9 +894,9 @@ public class Main {
             labelMensaje2.setFont(new Font("Segoe UI", Font.PLAIN, 12));
             
             panelTexto.add(labelTitulo);
-            panelTexto.add(Box.createRigidArea(new Dimension(0, 10)));
+            panelTexto.add(Box.createRigidArea(new Dimension(0, 8)));
             panelTexto.add(labelMensaje1);
-            panelTexto.add(Box.createRigidArea(new Dimension(0, 5)));
+            panelTexto.add(Box.createRigidArea(new Dimension(0, 4)));
             panelTexto.add(labelMensaje2);
             
             panelBienvenida.add(panelTexto, BorderLayout.CENTER);
