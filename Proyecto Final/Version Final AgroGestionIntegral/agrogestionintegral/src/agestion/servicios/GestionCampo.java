@@ -5,20 +5,13 @@ import agestion.modelo.Parcela;
 import agestion.modelo.ProductoAgricola;
 import agestion.modelo.TareaCampo;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.*;
 
 /**
- * GESTIÓN DE CAMPO CON INTERFAZ DE SOLAPAS MODERNA Y FONDO NEGRO
- * 
- * Esta clase gestiona las tareas de campo mediante una interfaz con pestañas
- * que organiza las funcionalidades de manera intuitiva y accesible.
- * 
- * @author Código Crítico 2025
- * @version 2.0
+ * GESTIÓN DE CAMPO CON INTERFAZ MEJORADA Y ORGANIZADA
  */
 public class GestionCampo {
 
@@ -31,186 +24,331 @@ public class GestionCampo {
     private JComboBox<Parcela> comboParcelas;
     private JComboBox<ProductoAgricola> comboProductos;
     private JComboBox<Maquinaria> comboMaquinarias;
-    private JTextField txtCantidad;
-    private JTextField txtDescripcion;
+    private JSpinner spinnerCantidad;
+    private JTextArea txtDescripcion;
     private JTextField txtOperador;
     private JTextArea areaHistorial;
+    private JButton btnGestionParcelas;
 
-    /**
-     * CONSTRUCTOR PRINCIPAL
-     * Inicializa los gestores necesarios para la gestión de campo
-     */
     public GestionCampo(GestionParcelas gestorParcelas, GestionStock gestorStock, GestionMaquinaria gestorMaquinaria) {
         this.gestorParcelas = gestorParcelas;
         this.gestorStock = gestorStock;
         this.gestorMaquinaria = gestorMaquinaria;
     }
 
-    /**
-     * MUESTRA LA INTERFAZ PRINCIPAL CON SOLAPAS Y FONDO NEGRO
-     */
     public void mostrarInterfazCompleta() {
-        // Crear diálogo principal
         JDialog dialog = new JDialog();
-        dialog.setTitle("Gestión de Campo - Cuaderno de Campo");
+        dialog.setTitle("Cuaderno de Campo - Gestión de Tareas Agrícolas");
         dialog.setModal(true);
-        dialog.setSize(1000, 700); // Tamaño aumentado para mejor visualización
+        dialog.setSize(900, 750);
         dialog.setLocationRelativeTo(null);
         dialog.setLayout(new BorderLayout());
-        
-        // FONDO NEGRO PARA EL DIÁLOGO PRINCIPAL
         dialog.getContentPane().setBackground(Color.BLACK);
 
-        // Crear panel de solapas
         JTabbedPane tabbedPane = new JTabbedPane();
-        tabbedPane.setBackground(Color.BLACK); // Fondo negro para las pestañas
-        tabbedPane.setForeground(Color.WHITE); // Texto blanco en las pestañas
+        tabbedPane.setBackground(Color.BLACK);
+        tabbedPane.setForeground(Color.WHITE);
         
-        // Agregar las solapas
         tabbedPane.addTab("📝 Registrar Tarea", crearPanelRegistroTarea());
-        tabbedPane.addTab("📊 Historial Tareas", crearPanelHistorial());
+        tabbedPane.addTab("📋 Historial Tareas", crearPanelHistorial());
         tabbedPane.addTab("📈 Estadísticas", crearPanelEstadisticas());
 
         dialog.add(tabbedPane, BorderLayout.CENTER);
-        
-        // Panel de botones inferiores
-        JPanel panelBotones = crearPanelBotones(dialog);
-        dialog.add(panelBotones, BorderLayout.SOUTH);
-
+        dialog.add(crearPanelBotones(dialog), BorderLayout.SOUTH);
         dialog.setVisible(true);
     }
 
-    /**
-     * CREA EL PANEL DE REGISTRO DE TAREAS CON FONDO NEGRO
-     * @return JPanel configurado para registro de tareas
-     */
     private JPanel crearPanelRegistroTarea() {
-        JPanel panel = new JPanel(new GridLayout(0, 2, 10, 10));
+        JPanel panel = new JPanel(new BorderLayout(10, 10));
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        panel.setBackground(Color.BLACK); // FONDO NEGRO
+        panel.setBackground(Color.BLACK);
 
-        // Inicializar componentes
+        // Panel principal con scroll para formulario largo
+        JPanel formPanel = new JPanel(new GridBagLayout());
+        formPanel.setBackground(Color.BLACK);
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(5, 5, 5, 5);
+
         inicializarComponentes();
 
-        // ========== CONFIGURACIÓN DE COMPONENTES CON ESTILO OSCURO ==========
+        // ========== FILA 1: PARCELA ==========
+        gbc.gridx = 0; gbc.gridy = 0; gbc.weightx = 0.3;
+        JLabel lblParcela = crearLabel("Parcela:");
+        formPanel.add(lblParcela, gbc);
 
-        // Parcela
-        JLabel lblParcela = new JLabel("Parcela:");
-        lblParcela.setForeground(Color.WHITE); // Texto blanco
-        panel.add(lblParcela);
-        comboParcelas.setBackground(Color.DARK_GRAY); // Fondo gris oscuro
-        comboParcelas.setForeground(Color.WHITE); // Texto blanco
-        panel.add(comboParcelas);
+        gbc.gridx = 1; gbc.weightx = 0.6;
+        formPanel.add(comboParcelas, gbc);
 
-        // Producto
-        JLabel lblProducto = new JLabel("Producto a utilizar:");
-        lblProducto.setForeground(Color.WHITE);
-        panel.add(lblProducto);
-        comboProductos.setBackground(Color.DARK_GRAY);
-        comboProductos.setForeground(Color.WHITE);
-        panel.add(comboProductos);
+        gbc.gridx = 2; gbc.weightx = 0.1;
+        btnGestionParcelas = crearBotonOscuro("➕");
+        btnGestionParcelas.setToolTipText("Gestionar Parcelas");
+        btnGestionParcelas.addActionListener(e -> abrirGestionParcelas());
+        formPanel.add(btnGestionParcelas, gbc);
 
-        // Maquinaria
-        JLabel lblMaquinaria = new JLabel("Maquinaria:");
-        lblMaquinaria.setForeground(Color.WHITE);
-        panel.add(lblMaquinaria);
-        comboMaquinarias.setBackground(Color.DARK_GRAY);
-        comboMaquinarias.setForeground(Color.WHITE);
-        panel.add(comboMaquinarias);
+        // ========== FILA 2: PRODUCTO ==========
+        gbc.gridx = 0; gbc.gridy = 1; gbc.weightx = 0.3;
+        JLabel lblProducto = crearLabel("Producto:");
+        formPanel.add(lblProducto, gbc);
 
-        // Cantidad
-        JLabel lblCantidad = new JLabel("Cantidad:");
-        lblCantidad.setForeground(Color.WHITE);
-        panel.add(lblCantidad);
-        txtCantidad.setBackground(Color.DARK_GRAY);
-        txtCantidad.setForeground(Color.WHITE);
-        txtCantidad.setCaretColor(Color.WHITE); // Cursor blanco
-        panel.add(txtCantidad);
+        gbc.gridx = 1; gbc.gridwidth = 2; gbc.weightx = 0.7;
+        formPanel.add(comboProductos, gbc);
+        gbc.gridwidth = 1;
 
-        // Descripción
-        JLabel lblDescripcion = new JLabel("Descripción de la tarea:");
-        lblDescripcion.setForeground(Color.WHITE);
-        panel.add(lblDescripcion);
-        txtDescripcion.setBackground(Color.DARK_GRAY);
-        txtDescripcion.setForeground(Color.WHITE);
-        txtDescripcion.setCaretColor(Color.WHITE);
-        panel.add(txtDescripcion);
+        // ========== FILA 3: MAQUINARIA ==========
+        gbc.gridx = 0; gbc.gridy = 2; gbc.weightx = 0.3;
+        JLabel lblMaquinaria = crearLabel("Maquinaria:");
+        formPanel.add(lblMaquinaria, gbc);
 
-        // Operador
-        JLabel lblOperador = new JLabel("Nombre del operador:");
-        lblOperador.setForeground(Color.WHITE);
-        panel.add(lblOperador);
-        txtOperador.setBackground(Color.DARK_GRAY);
-        txtOperador.setForeground(Color.WHITE);
-        txtOperador.setCaretColor(Color.WHITE);
-        panel.add(txtOperador);
+        gbc.gridx = 1; gbc.gridwidth = 2; gbc.weightx = 0.7;
+        formPanel.add(comboMaquinarias, gbc);
+        gbc.gridwidth = 1;
 
-        // Botón de registro con estilo oscuro
-        JButton btnRegistrar = crearBotonOscuro("✅ Registrar Tarea");
-        btnRegistrar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                registrarTareaDesdeInterfaz();
-            }
-        });
-        panel.add(btnRegistrar);
+        // ========== FILA 4: CANTIDAD ==========
+        gbc.gridx = 0; gbc.gridy = 3; gbc.weightx = 0.3;
+        JLabel lblCantidad = crearLabel("Cantidad (kg/l):");
+        formPanel.add(lblCantidad, gbc);
 
+        gbc.gridx = 1; gbc.gridwidth = 2; gbc.weightx = 0.7;
+        formPanel.add(spinnerCantidad, gbc);
+        gbc.gridwidth = 1;
+
+        // ========== FILA 5: OPERADOR ==========
+        gbc.gridx = 0; gbc.gridy = 4; gbc.weightx = 0.3;
+        JLabel lblOperador = crearLabel("Operador:");
+        formPanel.add(lblOperador, gbc);
+
+        gbc.gridx = 1; gbc.gridwidth = 2; gbc.weightx = 0.7;
+        formPanel.add(txtOperador, gbc);
+        gbc.gridwidth = 1;
+
+        // ========== FILA 6: DESCRIPCIÓN ==========
+        gbc.gridx = 0; gbc.gridy = 5; gbc.weightx = 0.3;
+        JLabel lblDescripcion = crearLabel("Descripción:");
+        formPanel.add(lblDescripcion, gbc);
+
+        gbc.gridx = 1; gbc.gridy = 5; gbc.gridwidth = 2; 
+        gbc.weightx = 0.7; gbc.weighty = 0.4;
+        gbc.fill = GridBagConstraints.BOTH;
+        JScrollPane scrollDescripcion = new JScrollPane(txtDescripcion);
+        scrollDescripcion.setPreferredSize(new Dimension(300, 80));
+        formPanel.add(scrollDescripcion, gbc);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.weighty = 0;
+
+        // ========== BOTÓN REGISTRAR ==========
+        gbc.gridx = 0; gbc.gridy = 6; gbc.gridwidth = 3;
+        gbc.weightx = 1.0; gbc.insets = new Insets(20, 5, 5, 5);
+        JButton btnRegistrar = crearBotonOscuro("✅ Registrar Tarea de Campo");
+        btnRegistrar.addActionListener(e -> registrarTareaDesdeInterfaz());
+        formPanel.add(btnRegistrar, gbc);
+
+        JScrollPane scrollForm = new JScrollPane(formPanel);
+        scrollForm.getViewport().setBackground(Color.BLACK);
+        scrollForm.setBorder(null);
+        
+        panel.add(scrollForm, BorderLayout.CENTER);
         return panel;
     }
 
-    /**
-     * CREA EL PANEL DE HISTORIAL DE TAREAS CON FONDO NEGRO
-     * @return JPanel configurado para mostrar historial
-     */
+    private void inicializarComponentes() {
+        // Combo de parcelas
+        comboParcelas = new JComboBox<>();
+        actualizarComboParcelas();
+        comboParcelas.setRenderer(new DefaultListCellRenderer() {
+            @Override
+            public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                Component c = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                if (value instanceof Parcela) {
+                    Parcela p = (Parcela) value;
+                    setText(p.toLineaListaString());
+                }
+                return c;
+            }
+        });
+
+        // Combo de productos
+        comboProductos = new JComboBox<>();
+        for (ProductoAgricola producto : gestorStock.getInventario()) {
+            comboProductos.addItem(producto);
+        }
+
+        // Combo de maquinarias
+        comboMaquinarias = new JComboBox<>();
+        for (Maquinaria maquinaria : gestorMaquinaria.getFlota()) {
+            comboMaquinarias.addItem(maquinaria);
+        }
+
+        // Spinner para cantidad con valores decimales
+        SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0.0, 0.0, 10000.0, 0.5);
+        spinnerCantidad = new JSpinner(spinnerModel);
+        JSpinner.NumberEditor editor = new JSpinner.NumberEditor(spinnerCantidad, "0.0##");
+        spinnerCantidad.setEditor(editor);
+
+        // Campo de operador
+        txtOperador = new JTextField();
+        
+        // Área de texto para descripción
+        txtDescripcion = new JTextArea(4, 20);
+        txtDescripcion.setLineWrap(true);
+        txtDescripcion.setWrapStyleWord(true);
+        
+        // Aplicar estilo oscuro a todos los componentes
+        aplicarEstiloOscuro(comboParcelas);
+        aplicarEstiloOscuro(comboProductos);
+        aplicarEstiloOscuro(comboMaquinarias);
+        aplicarEstiloOscuro(spinnerCantidad);
+        aplicarEstiloOscuro(txtOperador);
+        aplicarEstiloOscuro(txtDescripcion);
+    }
+
+    private void aplicarEstiloOscuro(JComponent componente) {
+        componente.setBackground(Color.DARK_GRAY);
+        componente.setForeground(Color.WHITE);
+        
+        // Aplicar setCaretColor solo a componentes de texto específicos
+        if (componente instanceof JTextField) {
+            ((JTextField) componente).setCaretColor(Color.WHITE);
+        } else if (componente instanceof JTextArea) {
+            ((JTextArea) componente).setCaretColor(Color.WHITE);
+        }
+        
+        // Manejo especial para JSpinner
+        if (componente instanceof JSpinner) {
+            JSpinner.DefaultEditor editor = (JSpinner.DefaultEditor) ((JSpinner) componente).getEditor();
+            editor.getTextField().setBackground(Color.DARK_GRAY);
+            editor.getTextField().setForeground(Color.WHITE);
+            editor.getTextField().setCaretColor(Color.WHITE);
+        }
+    }
+
+    private void actualizarComboParcelas() {
+        comboParcelas.removeAllItems();
+        ArrayList<Parcela> parcelas = gestorParcelas.getListaParcelas();
+        if (parcelas != null) {
+            for (Parcela parcela : parcelas) {
+                comboParcelas.addItem(parcela);
+            }
+        }
+        
+        // Si no hay parcelas, mostrar mensaje especial
+        if (comboParcelas.getItemCount() == 0) {
+            // Crear una parcela ficticia para mostrar el mensaje
+            Parcela parcelaFicticia = new Parcela(-1, "⚠️ NO HAY PARCELAS - CLICK EN '+' PARA AGREGAR", 0, "");
+            comboParcelas.addItem(parcelaFicticia);
+        }
+    }
+
+    private void abrirGestionParcelas() {
+        gestorParcelas.mostrarInterfazCompleta();
+        // Actualizar el combo después de cerrar la gestión de parcelas
+        actualizarComboParcelas();
+    }
+
+    private void registrarTareaDesdeInterfaz() {
+        try {
+            // Validar que hay parcelas disponibles
+            if (comboParcelas.getSelectedItem() == null) {
+                JOptionPane.showMessageDialog(null, 
+                    "No hay parcelas disponibles. Por favor, agregue parcelas primero.", 
+                    "Error", JOptionPane.ERROR_MESSAGE);
+                abrirGestionParcelas();
+                return;
+            }
+
+            Parcela parcelaSeleccionada = (Parcela) comboParcelas.getSelectedItem();
+            if (parcelaSeleccionada.getId() == -1) {
+                JOptionPane.showMessageDialog(null, 
+                    "No hay parcelas disponibles. Por favor, agregue parcelas primero.", 
+                    "Error", JOptionPane.ERROR_MESSAGE);
+                abrirGestionParcelas();
+                return;
+            }
+
+            // Validaciones básicas
+            if (comboProductos.getSelectedItem() == null) {
+                JOptionPane.showMessageDialog(null, "Seleccione un producto", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            double cantidad = (Double) spinnerCantidad.getValue();
+            if (cantidad <= 0) {
+                JOptionPane.showMessageDialog(null, "La cantidad debe ser mayor a cero", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Obtener datos
+            Parcela parcela = (Parcela) comboParcelas.getSelectedItem();
+            ProductoAgricola producto = (ProductoAgricola) comboProductos.getSelectedItem();
+            Maquinaria maquinaria = (Maquinaria) comboMaquinarias.getSelectedItem();
+            String descripcion = txtDescripcion.getText().isEmpty() ? "Tarea agrícola realizada" : txtDescripcion.getText();
+            String operador = txtOperador.getText().isEmpty() ? "Operador no especificado" : txtOperador.getText();
+
+            // Verificar stock
+            if (cantidad > producto.getCantidadEnStock()) {
+                JOptionPane.showMessageDialog(null, 
+                    String.format("Stock insuficiente. Disponible: %.2f, Solicitado: %.2f", 
+                                producto.getCantidadEnStock(), cantidad), 
+                    "Error de Stock", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Crear y registrar tarea
+            int nuevaId = historialTareas.size() + 1;
+            TareaCampo nuevaTarea = new TareaCampo(nuevaId, LocalDate.now(), descripcion, operador, 
+                                                  parcela, producto, maquinaria, cantidad);
+            
+            historialTareas.add(nuevaTarea);
+            gestorStock.actualizarStock(producto, -cantidad);
+
+            // Limpiar y actualizar
+            limpiarCampos();
+            actualizarHistorial();
+
+            JOptionPane.showMessageDialog(null, 
+                "✅ Tarea registrada exitosamente en " + parcela.getNombre(), 
+                "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, 
+                "Error al registrar tarea: " + e.getMessage(), 
+                "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+    }
+
     private JPanel crearPanelHistorial() {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        panel.setBackground(Color.BLACK); // FONDO NEGRO
+        panel.setBackground(Color.BLACK);
 
-        // Área de texto para el historial
         areaHistorial = new JTextArea(20, 50);
         areaHistorial.setEditable(false);
         areaHistorial.setFont(new Font("Monospaced", Font.PLAIN, 12));
-        areaHistorial.setBackground(Color.DARK_GRAY); // Fondo gris oscuro
-        areaHistorial.setForeground(Color.WHITE); // Texto blanco
-        areaHistorial.setCaretColor(Color.WHITE); // Cursor blanco
+        areaHistorial.setBackground(Color.DARK_GRAY);
+        areaHistorial.setForeground(Color.WHITE);
+        areaHistorial.setCaretColor(Color.WHITE);
         
-        // Scroll pane para el área de texto
         JScrollPane scrollPane = new JScrollPane(areaHistorial);
-        scrollPane.getViewport().setBackground(Color.DARK_GRAY); // Fondo del viewport
         panel.add(scrollPane, BorderLayout.CENTER);
 
-        // Botón para actualizar historial
         JButton btnActualizar = crearBotonOscuro("🔄 Actualizar Historial");
-        btnActualizar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                actualizarHistorial();
-            }
-        });
+        btnActualizar.addActionListener(e -> actualizarHistorial());
         
-        // Panel para el botón
         JPanel panelBoton = new JPanel();
         panelBoton.setBackground(Color.BLACK);
         panelBoton.add(btnActualizar);
         panel.add(panelBoton, BorderLayout.SOUTH);
 
-        // Cargar historial inicial
         actualizarHistorial();
-
         return panel;
     }
 
-    /**
-     * CREA EL PANEL DE ESTADÍSTICAS CON FONDO NEGRO
-     * @return JPanel configurado para mostrar estadísticas
-     */
     private JPanel crearPanelEstadisticas() {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        panel.setBackground(Color.BLACK); // FONDO NEGRO
+        panel.setBackground(Color.BLACK);
 
-        // Área de texto para estadísticas
         JTextArea areaEstadisticas = new JTextArea();
         areaEstadisticas.setEditable(false);
         areaEstadisticas.setFont(new Font("Monospaced", Font.PLAIN, 12));
@@ -218,118 +356,15 @@ public class GestionCampo {
         areaEstadisticas.setForeground(Color.WHITE);
         areaEstadisticas.setCaretColor(Color.WHITE);
         
-        // Calcular y mostrar estadísticas
-        String estadisticas = calcularEstadisticas();
-        areaEstadisticas.setText(estadisticas);
-        
+        areaEstadisticas.setText(calcularEstadisticas());
         panel.add(new JScrollPane(areaEstadisticas), BorderLayout.CENTER);
 
         return panel;
     }
 
-    /**
-     * INICIALIZA LOS COMPONENTES DE LA INTERFAZ
-     * Configura los combobox y campos de texto
-     */
-    private void inicializarComponentes() {
-        // Combo de parcelas - carga todas las parcelas disponibles
-        comboParcelas = new JComboBox<>();
-        for (Parcela parcela : gestorParcelas.getListaParcelas()) {
-            comboParcelas.addItem(parcela);
-        }
-
-        // Combo de productos - carga todos los productos del inventario
-        comboProductos = new JComboBox<>();
-        for (ProductoAgricola producto : gestorStock.getInventario()) {
-            comboProductos.addItem(producto);
-        }
-
-        // Combo de maquinarias - carga toda la flota disponible
-        comboMaquinarias = new JComboBox<>();
-        for (Maquinaria maquinaria : gestorMaquinaria.getFlota()) {
-            comboMaquinarias.addItem(maquinaria);
-        }
-
-        // Campos de texto
-        txtCantidad = new JTextField();
-        txtDescripcion = new JTextField();
-        txtOperador = new JTextField();
-    }
-
-    /**
-     * REGISTRA UNA TAREA DESDE LA INTERFAZ GRÁFICA
-     * Valida los datos y crea una nueva tarea de campo
-     */
-    private void registrarTareaDesdeInterfaz() {
-        try {
-            // ========== VALIDACIONES DE DATOS ==========
-
-            // Validar parcela seleccionada
-            if (comboParcelas.getSelectedItem() == null) {
-                JOptionPane.showMessageDialog(null, "Seleccione una parcela", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            // Validar producto seleccionado
-            if (comboProductos.getSelectedItem() == null) {
-                JOptionPane.showMessageDialog(null, "Seleccione un producto", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            // Validar cantidad
-            double cantidad = Double.parseDouble(txtCantidad.getText());
-            if (cantidad <= 0) {
-                JOptionPane.showMessageDialog(null, "La cantidad debe ser mayor a cero", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            // ========== OBTENER DATOS DE LA INTERFAZ ==========
-
-            Parcela parcela = (Parcela) comboParcelas.getSelectedItem();
-            ProductoAgricola producto = (ProductoAgricola) comboProductos.getSelectedItem();
-            Maquinaria maquinaria = (Maquinaria) comboMaquinarias.getSelectedItem();
-            String descripcion = txtDescripcion.getText().isEmpty() ? "Sin descripción" : txtDescripcion.getText();
-            String operador = txtOperador.getText().isEmpty() ? "No especificado" : txtOperador.getText();
-
-            // ========== VERIFICAR STOCK DISPONIBLE ==========
-
-            if (cantidad > producto.getCantidadEnStock()) {
-                JOptionPane.showMessageDialog(null, 
-                    "Stock insuficiente. Stock disponible: " + producto.getCantidadEnStock(), 
-                    "Error de Stock", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            // ========== CREAR Y REGISTRAR TAREA ==========
-
-            int nuevaId = historialTareas.size() + 1;
-            TareaCampo nuevaTarea = new TareaCampo(nuevaId, LocalDate.now(), descripcion, operador, 
-                                                  parcela, producto, maquinaria, cantidad);
-            
-            historialTareas.add(nuevaTarea);
-            gestorStock.actualizarStock(producto, -cantidad); // Actualizar stock
-
-            // ========== LIMPIAR CAMPOS Y ACTUALIZAR INTERFAZ ==========
-
-            limpiarCampos();
-            actualizarHistorial();
-
-            JOptionPane.showMessageDialog(null, "✅ Tarea registrada exitosamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "La cantidad debe ser un número válido", "Error", JOptionPane.ERROR_MESSAGE);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al registrar tarea: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    /**
-     * ACTUALIZA EL CONTENIDO DEL HISTORIAL DE TAREAS
-     * Muestra todas las tareas registradas en formato legible
-     */
     private void actualizarHistorial() {
         if (historialTareas.isEmpty()) {
-            areaHistorial.setText("No hay tareas registradas en el cuaderno de campo.");
+            areaHistorial.setText("=== CUADERNO DE CAMPO ===\n\nNo hay tareas registradas.");
             return;
         }
 
@@ -337,17 +372,19 @@ public class GestionCampo {
         historial.append("=== CUADERNO DE CAMPO - HISTORIAL COMPLETO ===\n\n");
         
         for (TareaCampo tarea : historialTareas) {
-            historial.append(tarea.toString()).append("\n");
-            historial.append("----------------------------------------\n");
+            historial.append("📅 Fecha: ").append(tarea.getFecha()).append("\n");
+            historial.append("🌿 Parcela: ").append(tarea.getParcela().getNombre()).append("\n");
+            historial.append("👤 Operador: ").append(tarea.getOperador()).append("\n");
+            historial.append("🧪 Producto: ").append(tarea.getProductoUtilizado().getNombre())
+                     .append(" (").append(tarea.getCantidadProducto()).append(")\n");
+            historial.append("🚜 Maquinaria: ").append(tarea.getMaquinariaUtilizada().getNombre()).append("\n");
+            historial.append("📝 Descripción: ").append(tarea.getDescripcion()).append("\n");
+            historial.append("─".repeat(50)).append("\n");
         }
 
         areaHistorial.setText(historial.toString());
     }
 
-    /**
-     * CALCULA ESTADÍSTICAS DETALLADAS DE LAS TAREAS
-     * @return String con estadísticas formateadas
-     */
     private String calcularEstadisticas() {
         StringBuilder stats = new StringBuilder();
         stats.append("=== ESTADÍSTICAS DE TAREAS DE CAMPO ===\n\n");
@@ -355,59 +392,26 @@ public class GestionCampo {
         stats.append("Total de tareas registradas: ").append(historialTareas.size()).append("\n\n");
         
         if (!historialTareas.isEmpty()) {
-            // ========== TAREAS POR PARCELA ==========
+            // Estadísticas por parcela
             stats.append("📊 TAREAS POR PARCELA:\n");
-            java.util.Map<String, Long> tareasPorParcela = historialTareas.stream()
-                .collect(java.util.stream.Collectors.groupingBy(
-                    t -> t.getParcela().getNombre(), 
-                    java.util.stream.Collectors.counting()
-                ));
+            java.util.Map<String, Integer> tareasPorParcela = new java.util.HashMap<>();
+            for (TareaCampo tarea : historialTareas) {
+                String nombreParcela = tarea.getParcela().getNombre();
+                tareasPorParcela.put(nombreParcela, tareasPorParcela.getOrDefault(nombreParcela, 0) + 1);
+            }
             
+            // Ordenar por cantidad de tareas (descendente)
             tareasPorParcela.entrySet().stream()
-                .sorted(java.util.Map.Entry.<String, Long>comparingByValue().reversed())
+                .sorted((a, b) -> b.getValue().compareTo(a.getValue()))
                 .forEach(entry -> stats.append("  🌿 ")
                     .append(entry.getKey()).append(": ")
                     .append(entry.getValue()).append(" tareas\n"));
             
-            // ========== PRODUCTOS MÁS UTILIZADOS ==========
-            stats.append("\n🧪 PRODUCTOS MÁS UTILIZADOS:\n");
-            java.util.Map<String, Double> productoUso = new java.util.HashMap<>();
-            java.util.Map<String, Long> productoCount = new java.util.HashMap<>();
-            
+            // Total de productos utilizados
+            double totalProductos = 0;
             for (TareaCampo tarea : historialTareas) {
-                String producto = tarea.getProductoUtilizado().getNombre();
-                double cantidad = tarea.getCantidadProducto();
-                
-                productoUso.put(producto, productoUso.getOrDefault(producto, 0.0) + cantidad);
-                productoCount.put(producto, productoCount.getOrDefault(producto, 0L) + 1);
+                totalProductos += tarea.getCantidadProducto();
             }
-            
-            productoUso.entrySet().stream()
-                .sorted(java.util.Map.Entry.<String, Double>comparingByValue().reversed())
-                .forEach(entry -> stats.append("  💊 ")
-                    .append(entry.getKey()).append(": ")
-                    .append(String.format("%.2f", entry.getValue()))
-                    .append(" unidades en ").append(productoCount.get(entry.getKey()))
-                    .append(" tareas\n"));
-            
-            // ========== OPERADORES MÁS ACTIVOS ==========
-            stats.append("\n👨‍🌾 OPERADORES MÁS ACTIVOS:\n");
-            java.util.Map<String, Long> operadoresActivos = historialTareas.stream()
-                .collect(java.util.stream.Collectors.groupingBy(
-                    TareaCampo::getOperador, 
-                    java.util.stream.Collectors.counting()
-                ));
-            
-            operadoresActivos.entrySet().stream()
-                .sorted(java.util.Map.Entry.<String, Long>comparingByValue().reversed())
-                .forEach(entry -> stats.append("  👤 ")
-                    .append(entry.getKey()).append(": ")
-                    .append(entry.getValue()).append(" tareas\n"));
-            
-            // ========== TOTAL DE PRODUCTOS UTILIZADOS ==========
-            double totalProductos = historialTareas.stream()
-                .mapToDouble(TareaCampo::getCantidadProducto)
-                .sum();
             stats.append("\n📦 TOTAL DE PRODUCTOS UTILIZADOS: ")
                  .append(String.format("%.2f", totalProductos))
                  .append(" unidades\n");
@@ -416,80 +420,57 @@ public class GestionCampo {
         return stats.toString();
     }
 
-    /**
-     * LIMPIA LOS CAMPOS DEL FORMULARIO DE REGISTRO
-     */
     private void limpiarCampos() {
-        txtCantidad.setText("");
+        spinnerCantidad.setValue(0.0);
         txtDescripcion.setText("");
         txtOperador.setText("");
     }
 
-    /**
-     * CREA EL PANEL DE BOTONES INFERIORES CON ESTILO OSCURO
-     * @param dialog Diálogo padre para cerrar
-     * @return JPanel con botones configurados
-     */
     private JPanel crearPanelBotones(JDialog dialog) {
         JPanel panel = new JPanel();
-        panel.setBackground(Color.BLACK); // Fondo negro
+        panel.setBackground(Color.BLACK);
         
-        // Botón cerrar con estilo oscuro
         JButton btnCerrar = crearBotonOscuro("Cerrar");
-        btnCerrar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dialog.dispose();
-            }
-        });
+        btnCerrar.addActionListener(e -> dialog.dispose());
         
         panel.add(btnCerrar);
         return panel;
     }
 
-    /**
-     * CREA UN BOTÓN CON ESTILO OSCURO Y EFECTO HOVER
-     * @param texto Texto del botón
-     * @return JButton configurado con estilo oscuro
-     */
     private JButton crearBotonOscuro(String texto) {
         JButton boton = new JButton(texto);
-        boton.setBackground(new Color(50, 50, 50)); // Gris oscuro
-        boton.setForeground(Color.WHITE); // Texto blanco
-        boton.setFocusPainted(false); // Sin borde de foco
-        boton.setBorderPainted(false); // Sin borde
+        boton.setBackground(new Color(50, 50, 50));
+        boton.setForeground(Color.WHITE);
+        boton.setFocusPainted(false);
+        boton.setBorderPainted(false);
         boton.setFont(new Font("Segoe UI", Font.BOLD, 12));
         
-        // EFECTO HOVER - Cambia el color al pasar el mouse
         boton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                boton.setBackground(new Color(70, 70, 70)); // Gris más claro al hover
-                boton.setCursor(new Cursor(Cursor.HAND_CURSOR)); // Cursor de mano
+                boton.setBackground(new Color(70, 70, 70));
+                boton.setCursor(new Cursor(Cursor.HAND_CURSOR));
             }
-
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                boton.setBackground(new Color(50, 50, 50)); // Volver al gris oscuro original
-                boton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR)); // Cursor normal
+                boton.setBackground(new Color(50, 50, 50));
+                boton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
             }
         });
         
         return boton;
     }
 
-    // ========== MÉTODOS COMPATIBLES CON LA VERSIÓN ANTERIOR ==========
+    private JLabel crearLabel(String texto) {
+        JLabel label = new JLabel(texto);
+        label.setForeground(Color.WHITE);
+        label.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        return label;
+    }
 
-    /**
-     * MÉTODO COMPATIBLE CON LA VERSIÓN ANTERIOR
-     * Abre la interfaz completa de gestión de campo
-     */
+    // Métodos compatibles
     public void registrarNuevaTarea() {
         mostrarInterfazCompleta();
     }
 
-    /**
-     * MÉTODO COMPATIBLE CON LA VERSIÓN ANTERIOR
-     * Abre la interfaz completa de gestión de campo
-     */
     public void mostrarHistorialTareas() {
         mostrarInterfazCompleta();
     }
