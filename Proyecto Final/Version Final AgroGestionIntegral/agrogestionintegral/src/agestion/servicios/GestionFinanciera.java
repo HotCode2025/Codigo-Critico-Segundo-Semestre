@@ -48,7 +48,7 @@ public class GestionFinanciera {
         JDialog dialog = new JDialog();
         dialog.setTitle("Gestión Financiera - Contabilidad Integral");
         dialog.setModal(true);
-        dialog.setSize(900, 700);
+        dialog.setSize(600, 600);
         dialog.setLocationRelativeTo(null);
         dialog.setLayout(new BorderLayout());
 

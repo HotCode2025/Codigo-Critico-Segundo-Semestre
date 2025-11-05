@@ -57,7 +57,7 @@ public class GestionParcelas {
         JDialog dialog = new JDialog();
         dialog.setTitle("Gestión de Parcelas - Administración de Terrenos");
         dialog.setModal(true);
-        dialog.setSize(1200, 700);
+        dialog.setSize(600, 600);
         dialog.setLocationRelativeTo(null);
         dialog.setLayout(new BorderLayout(10, 10));
         

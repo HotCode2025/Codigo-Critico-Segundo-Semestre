@@ -29,6 +29,8 @@ public class GestionCampo {
     private JTextField txtOperador;
     private JTextArea areaHistorial;
     private JButton btnGestionParcelas;
+    private JButton btnGestionProductos; // NUEVO: Botón para gestión de productos
+    private JButton btnGestionMaquinarias; // NUEVO: Botón para gestión de maquinarias
 
     public GestionCampo(GestionParcelas gestorParcelas, GestionStock gestorStock, GestionMaquinaria gestorMaquinaria) {
         this.gestorParcelas = gestorParcelas;
@@ -40,14 +42,17 @@ public class GestionCampo {
         JDialog dialog = new JDialog();
         dialog.setTitle("Cuaderno de Campo - Gestión de Tareas Agrícolas");
         dialog.setModal(true);
-        dialog.setSize(900, 750);
+        // MODIFICADO: Cambiar tamaño a 600x600 píxeles
+        dialog.setSize(600, 600);
         dialog.setLocationRelativeTo(null);
         dialog.setLayout(new BorderLayout());
-        dialog.getContentPane().setBackground(Color.BLACK);
+        // MODIFICADO: Cambiar color de fondo a GRIS SUAVE
+        dialog.getContentPane().setBackground(new Color(240, 240, 240));
 
         JTabbedPane tabbedPane = new JTabbedPane();
-        tabbedPane.setBackground(Color.BLACK);
-        tabbedPane.setForeground(Color.WHITE);
+        // MODIFICADO: Cambiar color de fondo a GRIS SUAVE
+        tabbedPane.setBackground(new Color(240, 240, 240));
+        tabbedPane.setForeground(Color.BLACK);
         
         tabbedPane.addTab("📝 Registrar Tarea", crearPanelRegistroTarea());
         tabbedPane.addTab("📋 Historial Tareas", crearPanelHistorial());
@@ -61,11 +66,13 @@ public class GestionCampo {
     private JPanel crearPanelRegistroTarea() {
         JPanel panel = new JPanel(new BorderLayout(10, 10));
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        panel.setBackground(Color.BLACK);
+        // MODIFICADO: Cambiar color de fondo a GRIS SUAVE
+        panel.setBackground(new Color(240, 240, 240));
 
         // Panel principal con scroll para formulario largo
         JPanel formPanel = new JPanel(new GridBagLayout());
-        formPanel.setBackground(Color.BLACK);
+        // MODIFICADO: Cambiar color de fondo a GRIS SUAVE
+        formPanel.setBackground(new Color(240, 240, 240));
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(5, 5, 5, 5);
@@ -81,7 +88,8 @@ public class GestionCampo {
         formPanel.add(comboParcelas, gbc);
 
         gbc.gridx = 2; gbc.weightx = 0.1;
-        btnGestionParcelas = crearBotonOscuro("➕");
+        // MODIFICADO: Cambiar botón "Agregar Tarea" a AZUL
+        btnGestionParcelas = crearBotonColor("➕", Color.BLUE);
         btnGestionParcelas.setToolTipText("Gestionar Parcelas");
         btnGestionParcelas.addActionListener(e -> abrirGestionParcelas());
         formPanel.add(btnGestionParcelas, gbc);
@@ -91,18 +99,30 @@ public class GestionCampo {
         JLabel lblProducto = crearLabel("Producto:");
         formPanel.add(lblProducto, gbc);
 
-        gbc.gridx = 1; gbc.gridwidth = 2; gbc.weightx = 0.7;
+        gbc.gridx = 1; gbc.weightx = 0.6;
         formPanel.add(comboProductos, gbc);
-        gbc.gridwidth = 1;
+
+        // NUEVO: Botón de lupa para gestión de productos
+        gbc.gridx = 2; gbc.weightx = 0.1;
+        btnGestionProductos = crearBotonLupa();
+        btnGestionProductos.setToolTipText("Gestionar Productos");
+        btnGestionProductos.addActionListener(e -> abrirGestionStock());
+        formPanel.add(btnGestionProductos, gbc);
 
         // ========== FILA 3: MAQUINARIA ==========
         gbc.gridx = 0; gbc.gridy = 2; gbc.weightx = 0.3;
         JLabel lblMaquinaria = crearLabel("Maquinaria:");
         formPanel.add(lblMaquinaria, gbc);
 
-        gbc.gridx = 1; gbc.gridwidth = 2; gbc.weightx = 0.7;
+        gbc.gridx = 1; gbc.weightx = 0.6;
         formPanel.add(comboMaquinarias, gbc);
-        gbc.gridwidth = 1;
+
+        // NUEVO: Botón de lupa para gestión de maquinarias
+        gbc.gridx = 2; gbc.weightx = 0.1;
+        btnGestionMaquinarias = crearBotonLupa();
+        btnGestionMaquinarias.setToolTipText("Gestionar Maquinarias");
+        btnGestionMaquinarias.addActionListener(e -> abrirGestionMaquinaria());
+        formPanel.add(btnGestionMaquinarias, gbc);
 
         // ========== FILA 4: CANTIDAD ==========
         gbc.gridx = 0; gbc.gridy = 3; gbc.weightx = 0.3;
@@ -138,13 +158,15 @@ public class GestionCampo {
 
         // ========== BOTÓN REGISTRAR ==========
         gbc.gridx = 0; gbc.gridy = 6; gbc.gridwidth = 3;
-        gbc.weightx = 1.0; gbc.insets = new Insets(20, 5, 5, 5);
-        JButton btnRegistrar = crearBotonOscuro("✅ Registrar Tarea de Campo");
+        gbc.weightx = 1.0; gbc.insets = new Insets(10, 5, 5, 5);
+        // MODIFICADO: Cambiar botón "Aceptar" a VERDE
+        JButton btnRegistrar = crearBotonColor("✅ Registrar Tarea de Campo", Color.GREEN);
         btnRegistrar.addActionListener(e -> registrarTareaDesdeInterfaz());
         formPanel.add(btnRegistrar, gbc);
 
         JScrollPane scrollForm = new JScrollPane(formPanel);
-        scrollForm.getViewport().setBackground(Color.BLACK);
+        // MODIFICADO: Cambiar color de fondo a GRIS SUAVE
+        scrollForm.getViewport().setBackground(new Color(240, 240, 240));
         scrollForm.setBorder(null);
         
         panel.add(scrollForm, BorderLayout.CENTER);
@@ -169,15 +191,11 @@ public class GestionCampo {
 
         // Combo de productos
         comboProductos = new JComboBox<>();
-        for (ProductoAgricola producto : gestorStock.getInventario()) {
-            comboProductos.addItem(producto);
-        }
+        actualizarComboProductos();
 
         // Combo de maquinarias
         comboMaquinarias = new JComboBox<>();
-        for (Maquinaria maquinaria : gestorMaquinaria.getFlota()) {
-            comboMaquinarias.addItem(maquinaria);
-        }
+        actualizarComboMaquinarias();
 
         // Spinner para cantidad con valores decimales
         SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0.0, 0.0, 10000.0, 0.5);
@@ -193,32 +211,104 @@ public class GestionCampo {
         txtDescripcion.setLineWrap(true);
         txtDescripcion.setWrapStyleWord(true);
         
-        // Aplicar estilo oscuro a todos los componentes
-        aplicarEstiloOscuro(comboParcelas);
-        aplicarEstiloOscuro(comboProductos);
-        aplicarEstiloOscuro(comboMaquinarias);
-        aplicarEstiloOscuro(spinnerCantidad);
-        aplicarEstiloOscuro(txtOperador);
-        aplicarEstiloOscuro(txtDescripcion);
+        // MODIFICADO: Cambiar estilo de componentes para fondo gris suave
+        aplicarEstiloGris(comboParcelas);
+        aplicarEstiloGris(comboProductos);
+        aplicarEstiloGris(comboMaquinarias);
+        aplicarEstiloGris(spinnerCantidad);
+        aplicarEstiloGris(txtOperador);
+        aplicarEstiloGris(txtDescripcion);
     }
 
-    private void aplicarEstiloOscuro(JComponent componente) {
-        componente.setBackground(Color.DARK_GRAY);
-        componente.setForeground(Color.WHITE);
+    // NUEVO: Método para crear botón con imagen de lupa
+    private JButton crearBotonLupa() {
+        try {
+            // Cargar la imagen de lupa desde el paquete de imágenes
+            ImageIcon iconoLupa = new ImageIcon(getClass().getResource("/agestion/images/lupa.jpg"));
+            // Escalar la imagen si es necesario
+            Image imagenEscalada = iconoLupa.getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH);
+            iconoLupa = new ImageIcon(imagenEscalada);
+            
+            JButton boton = new JButton(iconoLupa);
+            boton.setBackground(new Color(70, 130, 180)); // Color azul acero
+            boton.setForeground(Color.WHITE);
+            boton.setFocusPainted(false);
+            boton.setBorderPainted(false);
+            boton.setPreferredSize(new Dimension(30, 25));
+            
+            boton.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseEntered(java.awt.event.MouseEvent evt) {
+                    boton.setBackground(new Color(100, 149, 237)); // Azul más claro
+                    boton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                }
+                public void mouseExited(java.awt.event.MouseEvent evt) {
+                    boton.setBackground(new Color(70, 130, 180)); // Volver al azul acero
+                    boton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+                }
+            });
+            
+            return boton;
+        } catch (Exception e) {
+            // Si no se encuentra la imagen, crear un botón con texto
+            System.err.println("Error al cargar la imagen lupa.jpg: " + e.getMessage());
+            JButton boton = new JButton("🔍");
+            boton.setBackground(new Color(70, 130, 180));
+            boton.setForeground(Color.WHITE);
+            boton.setFocusPainted(false);
+            boton.setBorderPainted(false);
+            return boton;
+        }
+    }
+
+    // NUEVO: Método para actualizar combo de productos
+    private void actualizarComboProductos() {
+        comboProductos.removeAllItems();
+        for (ProductoAgricola producto : gestorStock.getInventario()) {
+            comboProductos.addItem(producto);
+        }
+    }
+
+    // NUEVO: Método para actualizar combo de maquinarias
+    private void actualizarComboMaquinarias() {
+        comboMaquinarias.removeAllItems();
+        for (Maquinaria maquinaria : gestorMaquinaria.getFlota()) {
+            comboMaquinarias.addItem(maquinaria);
+        }
+    }
+
+    // NUEVO: Método para abrir gestión de stock
+    private void abrirGestionStock() {
+        gestorStock.mostrarInterfazCompleta();
+        // Actualizar el combo después de cerrar la gestión de stock
+        actualizarComboProductos();
+    }
+
+    // NUEVO: Método para abrir gestión de maquinaria
+    private void abrirGestionMaquinaria() {
+        gestorMaquinaria.mostrarInterfazCompleta();
+        // Actualizar el combo después de cerrar la gestión de maquinaria
+        actualizarComboMaquinarias();
+    }
+
+    // MODIFICADO: Nuevo método para aplicar estilo con fondo gris suave
+    private void aplicarEstiloGris(JComponent componente) {
+        componente.setBackground(Color.WHITE);
+        componente.setForeground(Color.BLACK);
+        componente.setBorder(BorderFactory.createLineBorder(Color.GRAY));
         
         // Aplicar setCaretColor solo a componentes de texto específicos
         if (componente instanceof JTextField) {
-            ((JTextField) componente).setCaretColor(Color.WHITE);
+            ((JTextField) componente).setCaretColor(Color.BLACK);
         } else if (componente instanceof JTextArea) {
-            ((JTextArea) componente).setCaretColor(Color.WHITE);
+            ((JTextArea) componente).setCaretColor(Color.BLACK);
         }
         
         // Manejo especial para JSpinner
         if (componente instanceof JSpinner) {
             JSpinner.DefaultEditor editor = (JSpinner.DefaultEditor) ((JSpinner) componente).getEditor();
-            editor.getTextField().setBackground(Color.DARK_GRAY);
-            editor.getTextField().setForeground(Color.WHITE);
-            editor.getTextField().setCaretColor(Color.WHITE);
+            editor.getTextField().setBackground(Color.WHITE);
+            editor.getTextField().setForeground(Color.BLACK);
+            editor.getTextField().setCaretColor(Color.BLACK);
         }
     }
 
@@ -320,23 +410,26 @@ public class GestionCampo {
     private JPanel crearPanelHistorial() {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        panel.setBackground(Color.BLACK);
+        // MODIFICADO: Cambiar color de fondo a GRIS SUAVE
+        panel.setBackground(new Color(240, 240, 240));
 
         areaHistorial = new JTextArea(20, 50);
         areaHistorial.setEditable(false);
         areaHistorial.setFont(new Font("Monospaced", Font.PLAIN, 12));
-        areaHistorial.setBackground(Color.DARK_GRAY);
-        areaHistorial.setForeground(Color.WHITE);
-        areaHistorial.setCaretColor(Color.WHITE);
+        // MODIFICADO: Cambiar colores para fondo gris suave
+        areaHistorial.setBackground(Color.WHITE);
+        areaHistorial.setForeground(Color.BLACK);
+        areaHistorial.setCaretColor(Color.BLACK);
         
         JScrollPane scrollPane = new JScrollPane(areaHistorial);
         panel.add(scrollPane, BorderLayout.CENTER);
 
-        JButton btnActualizar = crearBotonOscuro("🔄 Actualizar Historial");
+        JButton btnActualizar = crearBotonColor("🔄 Actualizar Historial", new Color(50, 50, 50));
         btnActualizar.addActionListener(e -> actualizarHistorial());
         
         JPanel panelBoton = new JPanel();
-        panelBoton.setBackground(Color.BLACK);
+        // MODIFICADO: Cambiar color de fondo a GRIS SUAVE
+        panelBoton.setBackground(new Color(240, 240, 240));
         panelBoton.add(btnActualizar);
         panel.add(panelBoton, BorderLayout.SOUTH);
 
@@ -347,14 +440,16 @@ public class GestionCampo {
     private JPanel crearPanelEstadisticas() {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        panel.setBackground(Color.BLACK);
+        // MODIFICADO: Cambiar color de fondo a GRIS SUAVE
+        panel.setBackground(new Color(240, 240, 240));
 
         JTextArea areaEstadisticas = new JTextArea();
         areaEstadisticas.setEditable(false);
         areaEstadisticas.setFont(new Font("Monospaced", Font.PLAIN, 12));
-        areaEstadisticas.setBackground(Color.DARK_GRAY);
-        areaEstadisticas.setForeground(Color.WHITE);
-        areaEstadisticas.setCaretColor(Color.WHITE);
+        // MODIFICADO: Cambiar colores para fondo gris suave
+        areaEstadisticas.setBackground(Color.WHITE);
+        areaEstadisticas.setForeground(Color.BLACK);
+        areaEstadisticas.setCaretColor(Color.BLACK);
         
         areaEstadisticas.setText(calcularEstadisticas());
         panel.add(new JScrollPane(areaEstadisticas), BorderLayout.CENTER);
@@ -428,30 +523,41 @@ public class GestionCampo {
 
     private JPanel crearPanelBotones(JDialog dialog) {
         JPanel panel = new JPanel();
-        panel.setBackground(Color.BLACK);
+        // MODIFICADO: Cambiar color de fondo a GRIS SUAVE
+        panel.setBackground(new Color(240, 240, 240));
         
-        JButton btnCerrar = crearBotonOscuro("Cerrar");
+        // MODIFICADO: Cambiar botón "Cancelar" a ROJO
+        JButton btnCerrar = crearBotonColor("Cerrar", Color.RED);
         btnCerrar.addActionListener(e -> dialog.dispose());
         
         panel.add(btnCerrar);
         return panel;
     }
 
-    private JButton crearBotonOscuro(String texto) {
+    // MODIFICADO: Nuevo método para crear botones con colores específicos
+    private JButton crearBotonColor(String texto, Color color) {
         JButton boton = new JButton(texto);
-        boton.setBackground(new Color(50, 50, 50));
-        boton.setForeground(Color.WHITE);
+        boton.setBackground(color);
+        
+        // Determinar color de texto basado en el color de fondo para mejor contraste
+        if (color.equals(Color.GREEN) || color.equals(new Color(240, 240, 240))) {
+            boton.setForeground(Color.BLACK);
+        } else {
+            boton.setForeground(Color.WHITE);
+        }
+        
         boton.setFocusPainted(false);
         boton.setBorderPainted(false);
         boton.setFont(new Font("Segoe UI", Font.BOLD, 12));
         
         boton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                boton.setBackground(new Color(70, 70, 70));
+                // Efecto hover - aclarar el color
+                boton.setBackground(color.brighter());
                 boton.setCursor(new Cursor(Cursor.HAND_CURSOR));
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                boton.setBackground(new Color(50, 50, 50));
+                boton.setBackground(color);
                 boton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
             }
         });
@@ -461,7 +567,7 @@ public class GestionCampo {
 
     private JLabel crearLabel(String texto) {
         JLabel label = new JLabel(texto);
-        label.setForeground(Color.WHITE);
+        label.setForeground(Color.BLACK); // MODIFICADO: Texto negro para mejor contraste con gris suave
         label.setFont(new Font("Segoe UI", Font.BOLD, 12));
         return label;
     }

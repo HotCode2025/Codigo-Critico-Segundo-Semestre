@@ -55,7 +55,7 @@ public class GestionCosecha {
         JDialog dialog = new JDialog();
         dialog.setTitle("Gestión de Cosecha y Transporte");
         dialog.setModal(true);
-        dialog.setSize(900, 700);
+        dialog.setSize(600, 600);
         dialog.setLocationRelativeTo(null);
         dialog.setLayout(new BorderLayout());
 

@@ -46,7 +46,7 @@ public class GestionMaquinaria {
         JDialog dialog = new JDialog();
         dialog.setTitle("Gestión de Maquinaria - Control de Flota");
         dialog.setModal(true);
-        dialog.setSize(800, 600);
+        dialog.setSize(600, 600);
         dialog.setLocationRelativeTo(null);
         dialog.setLayout(new BorderLayout());
 

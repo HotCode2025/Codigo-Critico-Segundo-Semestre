@@ -319,16 +319,16 @@ public class Main {
 
         // BOTONES DE NAVEGACIÓN - TEXTO COMPLETO
         String[] botones = {
-            "🌱 Cuaderno de Campo", 
-            "🏞️ Gestión de Parcelas",    
-            "🚜 Cosecha y Transporte", 
-            "👥 Personal", 
-            "💧 Riego y Fertilización", 
-            "💰 Finanzas", 
-            "📦 Gestión de Stock", 
-            "🔧 Control de Maquinaria", 
-            "📞 Soporte Técnico", 
-            "🚪 Salir"
+            " Cuaderno de Campo", 
+            "️ Gestión de Parcelas",    
+            " Cosecha y Transporte", 
+            " Personal", 
+            " Riego y Fertilización", 
+            " Finanzas", 
+            " Gestión de Stock", 
+            " Control de Maquinaria", 
+            " Soporte Técnico", 
+            " Salir"
         };
 
         for (String textoBoton : botones) {
@@ -400,34 +400,34 @@ public class Main {
         
         // Mapear botones con sus imágenes correspondientes
         switch (textoBoton) {
-            case "🌱 Cuaderno de Campo":
+            case " Cuaderno de Campo":
                 nombreArchivo = "cuaderno.jpg";
                 break;
-            case "🏞️ Gestión de Parcelas":
+            case "️ Gestión de Parcelas":
                 nombreArchivo = "parcelas.jpg";
                 break;
-            case "🚜 Cosecha y Transporte":
+            case " Cosecha y Transporte":
                 nombreArchivo = "cosecha.jpg";
                 break;
-            case "👥 Personal":
+            case " Personal":
                 nombreArchivo = "personal.jpg";
                 break;
-            case "💧 Riego y Fertilización":
+            case " Riego y Fertilización":
                 nombreArchivo = "riego.jpg";
                 break;
-            case "💰 Finanzas":
+            case " Finanzas":
                 nombreArchivo = "finanzas.jpg";
                 break;
-            case "📦 Gestión de Stock":
+            case " Gestión de Stock":
                 nombreArchivo = "stock.jpg";
                 break;
-            case "🔧 Control de Maquinaria":
+            case " Control de Maquinaria":
                 nombreArchivo = "control.jpg";
                 break;
-            case "📞 Soporte Técnico":
+            case " Soporte Técnico":
                 nombreArchivo = "soporte.jpg";
                 break;
-            case "🚪 Salir":
+            case " Salir":
                 nombreArchivo = "salir.jpg";
                 break;
             default:
@@ -487,66 +487,66 @@ public class Main {
         System.out.println("🔘 Botón clickeado: " + textoBoton);
 
         switch (textoBoton) {
-            case "🌱 Cuaderno de Campo":
+            case " Cuaderno de Campo":
                 if (gestionCampo != null) {
                     gestionCampo.mostrarInterfazCompleta();
                 } else {
                     mostrarServicioNoDisponible("Cuaderno de Campo");
                 }
                 break;
-            case "🏞️ Gestión de Parcelas":
+            case "️ Gestión de Parcelas":
                 if (gestionParcelas != null) {
                     gestionParcelas.mostrarInterfazCompleta();
                 } else {
                     mostrarServicioNoDisponible("Gestión de Parcelas");
                 }
                 break;
-            case "🚜 Cosecha y Transporte":
+            case " Cosecha y Transporte":
                 if (gestionCosecha != null) {
                     gestionCosecha.mostrarInterfazCompleta();
                 } else {
                     mostrarServicioNoDisponible("Cosecha y Transporte");
                 }
                 break;
-            case "👥 Personal":
+            case " Personal":
                 if (gestionPersonal != null) {
                     gestionPersonal.mostrarInterfazCompleta();
                 } else {
                     mostrarServicioNoDisponible("Personal");
                 }
                 break;
-            case "💧 Riego y Fertilización":
+            case " Riego y Fertilización":
                 if (gestionRiegoFertilizacion != null) {
                     gestionRiegoFertilizacion.mostrarInterfazCompleta();
                 } else {
                     mostrarServicioNoDisponible("Riego y Fertilización");
                 }
                 break;
-            case "💰 Finanzas":
+            case " Finanzas":
                 if (gestionFinanciera != null) {
                     gestionFinanciera.mostrarInterfazCompleta();
                 } else {
                     mostrarServicioNoDisponible("Finanzas");
                 }
                 break;
-            case "📦 Gestión de Stock":
+            case " Gestión de Stock":
                 if (gestionStock != null) {
                     gestionStock.mostrarInterfazCompleta();
                 } else {
                     mostrarServicioNoDisponible("Gestión de Stock");
                 }
                 break;
-            case "🔧 Control de Maquinaria":
+            case " Control de Maquinaria":
                 if (gestionMaquinaria != null) {
                     gestionMaquinaria.mostrarInterfazCompleta();
                 } else {
                     mostrarServicioNoDisponible("Control de Maquinaria");
                 }
                 break;
-            case "📞 Soporte Técnico":
+            case " Soporte Técnico":
                 mostrarSoporteTecnico();
                 break;
-            case "🚪 Salir":
+            case " Salir":
                 confirmarSalida();
                 break;
             default:
@@ -626,15 +626,15 @@ public class Main {
             panelInfoSistema.setMaximumSize(new Dimension(400, 40));
             
             // Información del sistema en componentes separados pero CENTRADOS
-            JLabel versionLabel = new JLabel("📋 Versión: 2.5");
+            JLabel versionLabel = new JLabel(" Versión: 2.5");
             versionLabel.setForeground(Color.WHITE);
             versionLabel.setFont(new Font("Segoe UI", Font.BOLD, 12));
             
-            JLabel fechaLabel = new JLabel("📅 Fecha: Noviembre 2025");
+            JLabel fechaLabel = new JLabel(" Fecha: Noviembre 2025");
             fechaLabel.setForeground(Color.WHITE);
             fechaLabel.setFont(new Font("Segoe UI", Font.BOLD, 12));
             
-            JLabel javaLabel = new JLabel("☕ Java: 15 + SQLite + Swing");
+            JLabel javaLabel = new JLabel(" Java: 15 + SQLite + Swing");
             javaLabel.setForeground(Color.WHITE);
             javaLabel.setFont(new Font("Segoe UI", Font.BOLD, 12));
             
@@ -673,7 +673,7 @@ public class Main {
                 {"Baz Samira", "bazsamira79@gmail.com"},
                 {"Mendez Oscar", "Oreomendez99@gmail.com"},
                 {"Mamani Santino", "santinomamani25@gmail.com"},
-                {"Ponce de Leon Damian", "poncedeleondamianadolfo@gmail.com"}
+                {"Ponce de Leon Damián", "poncedeleondamianadolfo@gmail.com"}
             };
             
             for (String[] integrante : integrantes) {
@@ -780,7 +780,7 @@ public class Main {
                 "• Baz Samira - bazsamira79@gmail.com\n" +
                 "• Mendez Oscar - Oreomendez99@gmail.com\n" +
                 "• Mamani Santino - santinomamani25@gmail.com\n" +
-                "• Ponce de Leon Damian - poncedeleondamianadolfo@gmail.com\n\n" +
+                "• Ponce de Leon Damián - poncedeleondamianadolfo@gmail.com\n\n" +
                 "Información del sistema: Versión: 2.5 | Fecha: Noviembre 2025 | Java: 15 + SQLite + Swing";
 
             JOptionPane.showMessageDialog(frame, infoBasica, 
