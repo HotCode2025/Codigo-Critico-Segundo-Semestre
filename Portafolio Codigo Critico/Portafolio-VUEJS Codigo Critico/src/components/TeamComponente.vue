@@ -51,7 +51,7 @@ const team = ref([
     name: 'Gonzalez Joel', 
     role: 'DevOps Engineer', 
     photo: '/img/joel-photo.jpg', // Revisa esta ruta
-    githubUrl: 'https://github.com/joel-gonzalez' 
+    githubUrl: 'https://github.com/joelgonzalez7' 
   },
   { 
     name: 'Baz Samira', 
