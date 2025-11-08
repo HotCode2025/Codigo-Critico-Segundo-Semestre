@@ -16,7 +16,7 @@ import javax.swing.*;
  * Versión con botones más anchos y pantalla de soporte técnico optimizada.
  * 
  * @author Código Crítico 2025
- * @version 2.5
+ * @version 3.0
  */
 public class Main {
 
@@ -40,7 +40,7 @@ public class Main {
      * MÉTODO PRINCIPAL - Punto de entrada de la aplicación
      */
     public static void main(String[] args) {
-        System.out.println("🚀 Iniciando Agro Gestión Integral v2.5...");
+        System.out.println("🚀 Iniciando Agro Gestión Integral v3.0 ...");
 
         // Verificar requisitos del sistema
         if (!verificarRequisitosSistema()) {
@@ -219,7 +219,7 @@ public class Main {
         System.out.println("🎨 Creando interfaz gráfica con panel lateral MÁS ANCHO...");
 
         // Crear ventana principal
-        frame = new JFrame("Agro Gestión Integral v2.5");
+        frame = new JFrame("Agro Gestión Integral v3.0");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setMinimumSize(new Dimension(1100, 730)); // AUMENTADO para panel lateral más ancho
         frame.setPreferredSize(new Dimension(1100, 730));
@@ -263,14 +263,14 @@ public class Main {
             panel.add(labelLogo, BorderLayout.CENTER);
         } else {
             // Fallback si no se encuentra la imagen
-            JLabel labelTitulo = new JLabel("AGRO GESTIÓN INTEGRAL v2.5", JLabel.CENTER);
+            JLabel labelTitulo = new JLabel("AGRO GESTIÓN INTEGRAL v3.0 HIBRIDA (ARRAY - BASE DE DATOS)", JLabel.CENTER);
             labelTitulo.setFont(new Font("Segoe UI", Font.BOLD, 20));
             labelTitulo.setForeground(Color.WHITE);
             panel.add(labelTitulo, BorderLayout.CENTER);
         }
         
         // Mensaje de bienvenida en la parte inferior
-        JLabel labelMensaje = new JLabel("Seleccione una opción del menú lateral para comenzar", JLabel.CENTER);
+        JLabel labelMensaje = new JLabel("Seleccione una opción del menú lateral para comenzar (MODO HIBRIDO)", JLabel.CENTER);
         labelMensaje.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         labelMensaje.setForeground(Color.WHITE);
         labelMensaje.setBorder(BorderFactory.createEmptyBorder(15, 15, 25, 15));
@@ -673,7 +673,7 @@ public class Main {
                 {"Baz Samira", "bazsamira79@gmail.com"},
                 {"Mendez Oscar", "Oreomendez99@gmail.com"},
                 {"Mamani Santino", "santinomamani25@gmail.com"},
-                {"Ponce de Leon Damián", "poncedeleondamianadolfo@gmail.com"}
+                {"Ponce de León Damián", "poncedeleondamianadolfo@gmail.com"}
             };
             
             for (String[] integrante : integrantes) {
@@ -780,7 +780,7 @@ public class Main {
                 "• Baz Samira - bazsamira79@gmail.com\n" +
                 "• Mendez Oscar - Oreomendez99@gmail.com\n" +
                 "• Mamani Santino - santinomamani25@gmail.com\n" +
-                "• Ponce de Leon Damián - poncedeleondamianadolfo@gmail.com\n\n" +
+                "• Ponce de León Damián - poncedeleondamianadolfo@gmail.com\n\n" +
                 "Información del sistema: Versión: 2.5 | Fecha: Noviembre 2025 | Java: 15 + SQLite + Swing";
 
             JOptionPane.showMessageDialog(frame, infoBasica, 
