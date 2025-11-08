@@ -47,9 +47,9 @@ El sistema está organizado en los siguientes módulos funcionales:
 
 ## 💻 Tecnologías Utilizadas
 
--   **Lenguaje:** Java (JDK 11 o superior).
--   **Interfaz Gráfica:** Java Swing.
--   **Look and Feel (Tema):** [FlatLaf](https://www.formdev.com/flatlaf/)
+-   **Lenguaje:** Java (JDK 15 o superior).
+-   **Interfaz Gráfica:** Java Swing (usando JFrame, JPanel, JTabbedPane, etc.).
+-   **Look and Feel (Tema):** Nativo del Sistema Operativo (obtenido con UIManager.getSystemLookAndFeelClassName()) con un tema de colores personalizado.
 -   **IDE:** Apache NetBeans / Visual Studio Code
 
 ## 🚀 Instalación y Ejecución
@@ -62,12 +62,7 @@ Para ejecutar este proyecto, sigue estos pasos:
 
 2.  **Abrir en tu IDE preferido** (NetBeans o VS Code con el "Extension Pack for Java").
 
-3.  **Añadir la Biblioteca FlatLaf:**
-    * Crea una carpeta `lib` en la raíz del proyecto.
-    * Copia el archivo `flatlaf-x.x.x.jar` dentro de `lib`.
-    * En tu IDE, añade ese archivo `.jar` al "Classpath" o a las "Libraries" del proyecto.
-
-4.  **Ejecutar:**
+3.  **Ejecutar:**
     * Localiza el archivo `Main.java` en el paquete `agestion.main`.
     * Ejecuta el método `main`.
 

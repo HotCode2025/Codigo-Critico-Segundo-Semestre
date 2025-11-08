@@ -11,5 +11,8 @@
                 <root id="test.src.dir"/>
             </test-roots>
         </data>
+        <libraries xmlns="http://www.netbeans.org/ns/ant-project-libraries/1">
+            <definitions>/home/ariel/Descargas/sqlite-jdbc-3.51.0.0/nblibraries.properties</definitions>
+        </libraries>
     </configuration>
 </project>
