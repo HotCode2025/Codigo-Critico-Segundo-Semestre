@@ -1,8 +1,11 @@
 <script setup>
-// 1. Importa el ícono desde la ruta correcta (src/assets/github_icon.svg)
+// 1. Importa el ícono de GitHub
 // Asegúrate que la ruta @/assets/... sea correcta para tu proyecto. 
-// Si no, cámbiala a '../assets/github_icon.svg'
 import githubIcon from '@/assets/github_icon.svg'; 
+
+// 2. Importa el ícono de WhatsApp
+// (Asegúrate que el archivo se llame 'whatsapp_icon.svg' y esté en 'src/assets/')
+import whatsappIcon from '@/assets/whatsapp.png';
 </script>
 
 <template>
@@ -16,10 +19,20 @@ import githubIcon from '@/assets/github_icon.svg';
 
     <div class="social-links">
       
+      <!-- Enlace de GitHub (existente) -->
       <a href="https://github.com/HotCode2025/Codigo-Critico-Segundo-Semestre" target="_blank" rel="noopener noreferrer" title="Repositorio del Equipo">
         
         <img :src="githubIcon" alt="GitHub" class="social-icon">
 
+      </a>
+
+      <!-- Enlace de WhatsApp -->
+      <!-- RECUERDA CAMBIAR EL NÚMERO DE TELÉFONO AQUÍ -->
+      <a href="https://wa.me/5492622539357" target="_blank" rel="noopener noreferrer" title="Contáctanos por WhatsApp">
+        
+        <!-- Usamos el ícono importado de WhatsApp -->
+        <img :src="whatsappIcon" alt="WhatsApp" class="social-icon">
+      
       </a>
     </div>
     
@@ -38,34 +51,34 @@ import githubIcon from '@/assets/github_icon.svg';
   border-radius: 12px;
   margin: 2rem auto;
   max-width: 900px; /* Ancho máximo */
-  font-family: 'Inter', sans-serif; /* <-- FUENTE BASE APLICADA */
+  font-family: 'Inter', sans-serif; /* Fuente base aplicada */
 
   /* Transición suave para los cambios de tamaño */
   transition: padding 0.3s ease, margin 0.3s ease;
 }
 
 h1 {
-  font-family: 'Inter', sans-serif; /* <-- FUENTE APLICADA */
+  font-family: 'Inter', sans-serif; /* Fuente aplicada */
   font-size: 3rem;
-  font-weight: 900; /* <-- Peso "Black" para gran impacto */
+  font-weight: 900; /* Peso "Black" para gran impacto */
   margin-bottom: 0.5rem;
   color: #ffffff; /* Título principal en blanco */
   transition: font-size 0.3s ease; /* Transición suave */
 }
 
 h2 {
-  font-family: 'Inter', sans-serif; /* <-- FUENTE APLICADA */
+  font-family: 'Inter', sans-serif; /* Fuente aplicada */
   font-size: 1.75rem;
-  font-weight: 700; /* <-- Peso "Bold" para el subtítulo */
+  font-weight: 700; /* Peso "Bold" para el subtítulo */
   margin-bottom: 1.5rem;
   color: #bdc3c7; /* Subtítulo un poco más suave */
   transition: font-size 0.3s ease; /* Transición suave */
 }
 
 p {
-  font-family: 'Inter', sans-serif; /* <-- FUENTE APLICADA */
+  font-family: 'Inter', sans-serif; /* Fuente aplicada */
   font-size: 1.1rem;
-  font-weight: 400; /* <-- Peso "Regular" */
+  font-weight: 400; /* Peso "Regular" */
   line-height: 1.6;
   max-width: 700px;
   margin: 0 auto 2rem auto;
@@ -95,7 +108,7 @@ p {
 
 
 /* ============================================= */
-/* --- ESTE ES EL NUEVO BLOQUE RESPONSIVO --- */
+/* --- BLOQUE RESPONSIVO --- */
 /* ============================================= */
 /* "Si la pantalla mide 600px o menos..." */
 @media (max-width: 600px) {
