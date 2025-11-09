@@ -1,7 +1,11 @@
 <template>
   <nav class="navbar">
     <div class="navbar-menu">
-      <ul class="nav-list">
+      <ul>
+        <!-- 
+          Esta es la lista de 6 enlaces que tenías
+          en el portafolio del equipo
+        -->
         <li v-for="nav in navegacion" :key="nav.id">
           <a :href="nav.enlace" class="nav-item">{{ nav.nombre }}</a>
         </li>
@@ -12,6 +16,8 @@
 
 <script setup>
 import { ref } from 'vue';
+
+// Esta es la lista de 6 enlaces del portafolio del equipo
 const navegacion = ref([
   { id: 1, nombre: 'Equipo', enlace: '#equipo' },
   { id: 2, nombre: 'Educación', enlace: '#educacion' },
@@ -23,66 +29,91 @@ const navegacion = ref([
 </script>
 
 <style scoped>
-.navbar {
-  /* --- CAMBIO PRINCIPAL --- */
-  background-color: #2c3e50; /* <-- El azul que querías */
+/* Este es el nuevo código CSS que me proporcionaste,
+  aplicado a la barra de navegación del equipo.
+*/
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-  color: #fff;
-  padding: 0.5rem 1rem;
-  align-items: center;
+.navbar {
+  position: fixed; /* Fija la barra en la parte superior */
+  top: 0;
+  left: 0;
   width: 100%;
-  box-sizing: border-box; /* Para que el padding no afecte el ancho */
+  z-index: 1000; /* Asegura que esté por encima de otro contenido */
+
+  /* Usamos las variables globales definidas in main.css */
+  background: var(--cardBgColor);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 2px solid var(--lineColor);
+
+  padding: 0.8rem 1rem;
+  font-family: var(--font-sans);
+  box-sizing: border-box; /* Asegura que el padding no rompa el ancho */
 }
 
-/* Contenedor que empuja la lista a la derecha */
 .navbar-menu {
   display: flex;
-  justify-content: flex-end; /* Alinea la lista a la derecha */
+  justify-content: flex-end; /* Alinea los ítems a la derecha */
   width: 100%;
 }
 
-/* La lista <ul> */
-.nav-list {
-  display: flex; /* Pone los <li> en fila */
-  flex-wrap: wrap; /* Permite que se ajusten en pantallas pequeñas */
-  list-style: none; /* Quita los puntos de la lista */
-  padding: 0;
+.navbar-menu ul {
+  list-style: none;
+  display: flex;
+  gap: 0.5rem; /* Espacio entre ítems */
   margin: 0;
+  padding: 0;
 }
 
-/* El enlace <a> */
+/* El <li> es ahora el contenedor del <a> */
+.navbar-menu li {
+  margin: 0;
+  padding: 0;
+}
+
 .nav-item {
-  color: #ecf0f1; /* Un blanco un poco más suave */
+  color: var(--color-text-light);
   text-decoration: none;
+  font-size: 1rem;
   font-weight: 500;
-  padding: 8px 12px; /* Un padding más cómodo */
-  margin: 0 0.25rem; /* Espacio entre elementos */
-  display: inline-block; /* Para que el padding se aplique bien */
-  
-  /* Tu estilo de borde y transición */
-  border: 1px solid transparent; /* Transparente para que no "salte" en hover */
-  border-radius: 5px;
-  transition: 0.4s;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
+
+  /* Importante para que el <a> se comporte como bloque */
+  display: block;
 }
 
-/* Tu estilo de hover */
 .nav-item:hover {
-  background-color: hsla(160, 100%, 37%, 0.2);
-  border-color: hsla(160, 100%, 37%, 0.4); /* Un borde sutil verde */
-  color: #ffffff; /* Blanco puro al pasar el mouse */
+  /* Efecto Hover de tu paleta */
+  background-color: var(--color-primary-accent);
+  color: #ffffff;
+  border-color: var(--color-primary-accent);
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
 }
 
+/* --- RESPONSIVIDAD PARA MÓVIL --- */
 @media (max-width: 768px) {
-  /* En pantallas pequeñas, es mejor centrar los enlaces */
   .navbar-menu {
-    justify-content: center;
+    justify-content: center; /* Centra los ítems en móvil */
   }
-  .nav-list {
-    justify-content: center;
+
+  .navbar {
+    padding: 0.5rem;
   }
+
+  .navbar-menu ul {
+    /* Asegura que quepan más elementos si son muchos */
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.2rem;
+  }
+
   .nav-item {
-    padding: 6px 8px; /* Un poco más pequeño en móvil */
-    margin: 2px;
+    font-size: 0.8rem; /* Texto más pequeño */
+    padding: 0.4rem 0.6rem; /* Padding más pequeño */
   }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <section class="team-section">
-    <h2>Nuestro Equipo: <span>CODIGO CRITICO</span></h2>
+    <h2>Nuestro Equipo</h2>
     <div class="team-grid">
       
       <div v-for="member in team" :key="member.name" class="team-card">
@@ -45,7 +45,7 @@ const team = ref([
     name: 'Silva Daniel', 
     role: 'Frontend Developer', 
     photo: '/img/daniel-photo.jpg', // Revisa esta ruta
-    githubUrl: 'https://github.com/daniel-silva' 
+    githubUrl: 'https://github.com/DaniDolhartz' 
   },
   { 
     name: 'Gonzalez Joel', 
@@ -56,26 +56,26 @@ const team = ref([
   { 
     name: 'Baz Samira', 
     role: 'Scrum Master', 
-    photo: '/img/samira-photo.jpg', // Revisa esta ruta
-    githubUrl: 'https://github.com/samira-baz' 
+    photo: '/img/perfilmujer.jpeg', // Revisa esta ruta
+    githubUrl: 'https://github.com/Samira-Baz' 
   },
   { 
     name: 'Mendez Oscar', 
     role: 'Quality Assurance', 
     photo: '/img/oscar-photo.jpg', // Revisa esta ruta
-    githubUrl: 'https://github.com/oscar-mendez' 
+    githubUrl: 'https://github.com/OskyMendez' 
   },
   { 
     name: 'Mamani Santino', 
     role: 'Frontend Developer', 
-    photo: '/img/santino-photo.jpg', // Revisa esta ruta
-    githubUrl: 'https://github.com/santino-mamani' 
+    photo: '/img/perfilhombre.jpeg', // Revisa esta ruta
+    githubUrl: 'https://github.com/SantinoMamani' 
   },
   { 
     name: 'Ponce de Leon Damian', 
     role: 'Backend Developer', 
     photo: '/img/damian-photo.jpg', // Revisa esta ruta
-    githubUrl: 'https://github.com/damian-ponce' 
+    githubUrl: 'https://github.com/Clarionda' 
   }
 ]);
 </script>
